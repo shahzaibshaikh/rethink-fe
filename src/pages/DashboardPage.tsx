@@ -1,6 +1,7 @@
 import { Grid, GridItem, Show } from '@chakra-ui/react';
 
 import FolderMenu from '../components/FolderMenu';
+import NotesListing from '../components/NotesListing';
 
 function DashboardPage() {
   return (
@@ -13,8 +14,8 @@ function DashboardPage() {
           <FolderMenu />
         </GridItem>
       </Show>
-      <GridItem area='center' background='gray.700' height='100vh'>
-        Center
+      <GridItem area='center' background='gray.700' height='100vh' padding={8}>
+        <NotesListing />
       </GridItem>
       <GridItem area='main' background='gray.600' height='100vh' padding={3}>
         Main
