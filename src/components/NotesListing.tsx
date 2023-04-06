@@ -1,10 +1,11 @@
 import { Heading, HStack } from '@chakra-ui/react';
 import { HiFolder } from 'react-icons/hi';
+import NoteCard from './NoteCard';
 
 const notes = [
   {
     folder: {
-      folderId: '642dcb67a8bb2a3e62b1b2e8',
+      folder_id: '642dcb67a8bb2a3e62b1b2e8',
       name: 'Favorites'
     },
     _id: '642dcb49a8bb2a3e62b1b2e4',
@@ -35,6 +36,14 @@ function NotesListing() {
           All notes
         </Heading>
       </HStack>
+
+      {notes.map(note => (
+        <NoteCard
+          title={note.title}
+          content={note.content}
+          folder_name={note.folder.name}
+        />
+      ))}
     </div>
   );
 }
