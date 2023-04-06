@@ -21,7 +21,8 @@ const notes = [
     },
     _id: '642dccd097a7fad43482bc0a',
     title: 'Abiha note with proper folder 2',
-    content: 'Some random text 2',
+    content:
+      'Some random text 2 aksjdn akjsnd kjansd kjansdkj anskdj naksjdn kjasnd jkasndkj ansdkjnas kjdn ',
     created_at: '2023-04-05T19:32:33.005Z',
     updated_at: '2023-04-05T19:32:33.005Z'
   }
@@ -30,7 +31,7 @@ const notes = [
 function NotesListing() {
   return (
     <div>
-      <HStack color='gray.500' mt={4}>
+      <HStack color='gray.500' mt={4} mb={8}>
         <HiFolder size={24} />
         <Heading color='white' fontSize='18px' mb={6}>
           All notes
