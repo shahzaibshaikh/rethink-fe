@@ -1,16 +1,16 @@
-import { Grid, GridItem } from '@chakra-ui/react';
+import { Grid, GridItem, Show } from '@chakra-ui/react';
 
 function App() {
   return (
     <Grid
-      templateAreas={{
-        base: `"nav" "main"`,
-        lg: `"aside nav" "aside main"`
-      }}
+      gridTemplateAreas={{ md: `"aside center main"`, base: `"center main"` }}
+      gridTemplateColumns={{ md: '200px 300px auto', base: 'repeat(3, 1fr)' }}
     >
-      <GridItem area='nav'>Nav</GridItem>
-      <GridItem area='aside'>Aside</GridItem>
-      <GridItem area='main'>Main</GridItem>
+      <Show above='md'>
+        <GridItem>Aside</GridItem>
+      </Show>
+      <GridItem>Center</GridItem>
+      <GridItem>Main</GridItem>
     </Grid>
   );
 }
