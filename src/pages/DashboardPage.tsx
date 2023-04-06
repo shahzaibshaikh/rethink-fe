@@ -1,5 +1,6 @@
 import { Grid, GridItem, Show } from '@chakra-ui/react';
-import React from 'react';
+
+import FolderMenu from '../components/FolderMenu';
 
 function DashboardPage() {
   return (
@@ -8,8 +9,8 @@ function DashboardPage() {
       gridTemplateColumns={{ lg: '250px 300px auto', base: '1fr 2fr' }}
     >
       <Show above='lg'>
-        <GridItem area='aside' background='gray.800' height='100vh'>
-          Aside
+        <GridItem area='aside' background='gray.800' height='100vh' padding={8}>
+          <FolderMenu />
         </GridItem>
       </Show>
       <GridItem area='center' background='gray.700' height='100vh'>
