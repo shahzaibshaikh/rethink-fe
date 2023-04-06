@@ -1,6 +1,8 @@
-import { Heading, Image, Text } from '@chakra-ui/react';
-import { useEffect } from 'react';
+import { Heading, HStack, Image, Text } from '@chakra-ui/react';
+
 import brandImage from '../assets/rethink-logo-full.png';
+import { HiFolder } from 'react-icons/hi';
+import { HiFolderPlus } from 'react-icons/hi2';
 
 let folders = [
   {
@@ -40,15 +42,28 @@ function FolderMenu() {
         Folders
       </Heading>
 
-      <Text color='gray.500' fontSize='14px' fontWeight={700} mt={3}>
-        All notes
-      </Text>
+      <HStack color='gray.500' mt={4}>
+        <HiFolder size={20} />
+        <Text fontSize='14px' fontWeight={700}>
+          All notes
+        </Text>
+      </HStack>
 
       {folders.map(folder => (
-        <Text key={folder._id} color='gray.500' fontSize='14px' fontWeight={700} mt={3}>
-          {folder.name}
-        </Text>
+        <HStack key={folder._id} color='gray.500' mt={4}>
+          <HiFolder size={20} />
+          <Text fontSize='14px' fontWeight={700}>
+            {folder.name}
+          </Text>
+        </HStack>
       ))}
+
+      <HStack color='gray.500' mt={4}>
+        <HiFolderPlus size={18} />
+        <Text fontSize='14px' fontWeight={700}>
+          Add folder
+        </Text>
+      </HStack>
     </div>
   );
 }
