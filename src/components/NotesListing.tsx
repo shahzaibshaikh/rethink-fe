@@ -1,4 +1,4 @@
-import { Heading, HStack } from '@chakra-ui/react';
+import { Box, Heading, HStack } from '@chakra-ui/react';
 import { HiFolder } from 'react-icons/hi';
 import NoteCard from './NoteCard';
 
@@ -30,7 +30,7 @@ const notes = [
 
 function NotesListing() {
   return (
-    <div>
+    <Box>
       <HStack color='gray.500' mt={4} mb={8}>
         <HiFolder size={24} />
         <Heading color='white' fontSize='18px' mb={6}>
@@ -40,12 +40,13 @@ function NotesListing() {
 
       {notes.map(note => (
         <NoteCard
+          key={note._id}
           title={note.title}
           content={note.content}
           folder_name={note.folder.name}
         />
       ))}
-    </div>
+    </Box>
   );
 }
 
