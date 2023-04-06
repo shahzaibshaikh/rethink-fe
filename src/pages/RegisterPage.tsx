@@ -1,5 +1,5 @@
 import { Box, Button, FormControl, FormLabel, Image, Input } from '@chakra-ui/react';
-import bgImage from '../assets/ales-krivec-3sBnJqI8LXo-unsplash.jpg';
+import bgImage from '../assets/stefan-cosma-muK4j9HjIrQ-unsplash.jpg';
 import brandImage from '../assets/rethink-logo-full.png';
 
 function RegisterPage() {
