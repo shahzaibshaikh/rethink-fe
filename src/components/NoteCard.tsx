@@ -1,5 +1,6 @@
 import { Badge, Box, Card, Heading, Text } from '@chakra-ui/react';
 import React from 'react';
+import FolderBadge from './FolderBadge';
 import HorizontalLine from './HorizontalLine';
 
 interface NoteCardProps {
@@ -30,9 +31,7 @@ function NoteCard({ title, content, folder_name }: NoteCardProps) {
         >
           {content}
         </Text>
-        <Badge borderRadius={10} padding='2px 6px' fontSize={10}>
-          {folder_name}
-        </Badge>
+        <FolderBadge folder_name={folder_name} />
       </Box>
       <HorizontalLine />
     </>
