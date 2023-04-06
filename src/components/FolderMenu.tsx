@@ -37,12 +37,12 @@ let folders = [
 function FolderMenu() {
   return (
     <div>
-      <Image src={brandImage} width={40} />
-      <Heading color='white' fontSize='18px' mt={12} mb={6}>
+      <Image src={brandImage} width={36} />
+      <Heading color='white' fontSize='18px' mt={9} mb={8}>
         Folders
       </Heading>
 
-      <HStack color='gray.500' mt={4}>
+      <HStack color='gray.500'>
         <HiFolder size={20} />
         <Text fontSize='14px' fontWeight={700}>
           All notes

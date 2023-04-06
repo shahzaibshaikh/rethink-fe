@@ -1,6 +1,7 @@
 import { Box, Heading, HStack } from '@chakra-ui/react';
 import { HiFolder } from 'react-icons/hi';
 import NoteCard from './NoteCard';
+import SearchInput from './SearchInput';
 
 const notes = [
   {
@@ -31,7 +32,8 @@ const notes = [
 function NotesListing() {
   return (
     <Box>
-      <HStack color='gray.500' mt={4} mb={8}>
+      <SearchInput />
+      <HStack color='gray.500' mt={9} mb={6}>
         <HiFolder size={24} />
         <Heading color='white' fontSize='18px' mb={6}>
           All notes

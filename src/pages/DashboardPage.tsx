@@ -14,7 +14,7 @@ function DashboardPage() {
           <FolderMenu />
         </GridItem>
       </Show>
-      <GridItem area='center' background='gray.700' height='100vh' padding={8}>
+      <GridItem area='center' background='gray.700' height='100vh' padding={4}>
         <NotesListing />
       </GridItem>
       <GridItem area='main' background='gray.600' height='100vh' padding={3}>
