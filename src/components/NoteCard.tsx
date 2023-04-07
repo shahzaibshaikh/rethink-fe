@@ -39,7 +39,6 @@ function NoteCard({ title, content, folder_name }: NoteCardProps) {
         </Text>
         <FolderBadge folder_name={folder_name} />
       </Box>
-      <HorizontalLine />
     </>
   );
 }
