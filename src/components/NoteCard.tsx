@@ -21,7 +21,7 @@ function NoteCard({ title, content, updated_at, folder_name }: NoteCardProps) {
       >
         <Heading
           color='white'
-          fontSize='14px'
+          fontSize='13px'
           noOfLines={1}
           overflowWrap='break-word'
           mb={1}

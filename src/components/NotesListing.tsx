@@ -1,5 +1,5 @@
 import { Box, Heading, HStack } from '@chakra-ui/react';
-import { HiFolder } from 'react-icons/hi';
+import { BsFillFolderFill } from 'react-icons/bs';
 import HorizontalLine from './HorizontalLine';
 import NoteCard from './NoteCard';
 import SearchInput from './SearchInput';
@@ -97,8 +97,14 @@ function NotesListing() {
     <Box>
       <SearchInput />
       <HStack color='gray.500' mt={9} mb={6}>
-        <HiFolder size={24} />
-        <Heading color='white' fontSize='18px' mb={6}>
+        <BsFillFolderFill size={22} />
+        <Heading
+          color='white'
+          fontSize='18px'
+          mb={6}
+          noOfLines={1}
+          overflowWrap='break-word'
+        >
           All notes
         </Heading>
       </HStack>
@@ -108,16 +114,15 @@ function NotesListing() {
             count++;
           }
           return (
-            <>
+            <Box key={note._id}>
               <NoteCard
-                key={note._id}
                 title={note.title}
                 content={note.content}
                 folder_name={note.folder.name}
                 updated_at={note.updated_at}
               />
               {count !== notesLength && <HorizontalLine />}
-            </>
+            </Box>
           );
         })}
       </Box>

@@ -1,6 +1,7 @@
 import { Grid, GridItem, Show } from '@chakra-ui/react';
 
 import FolderMenu from '../components/FolderMenu';
+import MainForm from '../components/MainForm';
 import NotesListing from '../components/NotesListing';
 
 function DashboardPage() {
@@ -17,8 +18,8 @@ function DashboardPage() {
       <GridItem area='center' background='gray.700' height='100vh' padding={4}>
         <NotesListing />
       </GridItem>
-      <GridItem area='main' background='gray.600' height='100vh' padding={4}>
-        Main
+      <GridItem area='main' background='gray.600' height='100vh' padding={6}>
+        <MainForm />
       </GridItem>
     </Grid>
   );

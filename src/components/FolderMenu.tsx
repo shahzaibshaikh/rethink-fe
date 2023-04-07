@@ -1,7 +1,6 @@
 import { Button, Heading, HStack, Image, Text } from '@chakra-ui/react';
-
 import brandImage from '../assets/rethink-logo-full.png';
-import { HiFolder } from 'react-icons/hi';
+import { BsFillFolderFill } from 'react-icons/bs';
 import { HiFolderPlus } from 'react-icons/hi2';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 
@@ -47,7 +46,7 @@ function FolderMenu() {
         width='100%'
         borderRadius={20}
         color='white'
-        bg='purple.600'
+        bg='purple.700'
         variant='solid'
         _hover={{ bg: 'gray.700', color: 'gray.100' }}
       >
@@ -59,7 +58,7 @@ function FolderMenu() {
       </Heading>
 
       <HStack color='gray.500' _hover={{ color: 'white', transition: '300ms' }}>
-        <HiFolder size={20} />
+        <BsFillFolderFill size={16} />
         <Text fontSize='14px' fontWeight={700}>
           All notes
         </Text>
@@ -72,7 +71,7 @@ function FolderMenu() {
           mt={4}
           _hover={{ color: 'white', transition: '300ms' }}
         >
-          <HiFolder size={20} />
+          <BsFillFolderFill size={16} />
           <Text fontSize='14px' fontWeight={700}>
             {folder.name}
           </Text>
@@ -80,7 +79,7 @@ function FolderMenu() {
       ))}
 
       <HStack color='gray.500' mt={4} _hover={{ color: 'white', transition: '300ms' }}>
-        <HiFolderPlus size={18} />
+        <HiFolderPlus size={17} />
         <Text fontSize='14px' fontWeight={700}>
           Add folder
         </Text>
