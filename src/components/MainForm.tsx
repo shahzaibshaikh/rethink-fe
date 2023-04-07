@@ -36,9 +36,9 @@ function MainForm() {
           initialValue={formData}
           init={{
             height: 500,
-            menubar: false,
-            skin: 'oxide-dark',
-            content_css: 'dark',
+            menubar: true,
+            skin: 'tinymce-5-dark',
+            content_css: '/tinymce.css',
             plugins: [
               'advlist',
               'autolink',
@@ -55,16 +55,13 @@ function MainForm() {
               'insertdatetime',
               'media',
               'table',
-              'code',
-              'help',
-              'wordcount'
+              'code'
             ],
             toolbar:
-              'undo redo | blocks | ' +
               'bold italic forecolor | alignleft aligncenter ' +
-              'alignright alignjustify | bullist numlist outdent indent | ' +
-              'removeformat | help',
-            content_style: 'body { font-family:Inter,sans-serif; font-size:14px }'
+              'alignright alignjustify | bullist numlist outdent indent | ',
+
+            content_style: 'body { font-family:Inter,sans-serif; font-size:13px }'
           }}
         />
         <button onClick={log}>Log editor content</button>
