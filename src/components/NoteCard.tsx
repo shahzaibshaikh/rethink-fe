@@ -12,7 +12,13 @@ interface NoteCardProps {
 function NoteCard({ title, content, folder_name }: NoteCardProps) {
   return (
     <>
-      <Box padding={2} mb={2} mt={2} borderRadius={6} _hover={{ background: 'gray.600' }}>
+      <Box
+        padding={2}
+        mb={2}
+        mt={2}
+        borderRadius={8}
+        _hover={{ background: 'gray.600', transition: '300ms' }}
+      >
         <Heading
           color='white'
           fontSize='14px'

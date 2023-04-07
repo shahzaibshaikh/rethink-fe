@@ -42,7 +42,7 @@ function FolderMenu() {
         Folders
       </Heading>
 
-      <HStack color='gray.500'>
+      <HStack color='gray.500' _hover={{ color: 'white', transition: '300ms' }}>
         <HiFolder size={20} />
         <Text fontSize='14px' fontWeight={700}>
           All notes
@@ -50,7 +50,12 @@ function FolderMenu() {
       </HStack>
 
       {folders.map(folder => (
-        <HStack key={folder._id} color='gray.500' mt={4}>
+        <HStack
+          key={folder._id}
+          color='gray.500'
+          mt={4}
+          _hover={{ color: 'white', transition: '300ms' }}
+        >
           <HiFolder size={20} />
           <Text fontSize='14px' fontWeight={700}>
             {folder.name}
@@ -58,7 +63,7 @@ function FolderMenu() {
         </HStack>
       ))}
 
-      <HStack color='gray.500' mt={4}>
+      <HStack color='gray.500' mt={4} _hover={{ color: 'white', transition: '300ms' }}>
         <HiFolderPlus size={18} />
         <Text fontSize='14px' fontWeight={700}>
           Add folder
