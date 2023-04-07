@@ -6,7 +6,7 @@ interface FolderBadgeProps {
 
 function FolderBadge({ folder_name }: FolderBadgeProps) {
   return (
-    <Badge borderRadius={10} padding='2px 6px' fontSize={10}>
+    <Badge borderRadius={10} padding='2px 6px' fontSize={10} colorScheme='purple'>
       {folder_name}
     </Badge>
   );
