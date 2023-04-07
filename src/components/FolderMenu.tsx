@@ -1,8 +1,9 @@
-import { Heading, HStack, Image, Text } from '@chakra-ui/react';
+import { Button, Heading, HStack, Image, Text } from '@chakra-ui/react';
 
 import brandImage from '../assets/rethink-logo-full.png';
 import { HiFolder } from 'react-icons/hi';
 import { HiFolderPlus } from 'react-icons/hi2';
+import { AiOutlinePlusCircle } from 'react-icons/ai';
 
 let folders = [
   {
@@ -38,7 +39,22 @@ function FolderMenu() {
   return (
     <div>
       <Image src={brandImage} width={36} />
-      <Heading color='white' fontSize='18px' mt={9} mb={8}>
+
+      <Button
+        fontSize='sm'
+        mt='7'
+        leftIcon={<AiOutlinePlusCircle size={20} />}
+        width='100%'
+        borderRadius={20}
+        color='white'
+        bg='purple.600'
+        variant='solid'
+        _hover={{ bg: 'gray.700', color: 'gray.100' }}
+      >
+        New note
+      </Button>
+
+      <Heading color='white' fontSize='18px' mt={7} mb={6}>
         Folders
       </Heading>
 

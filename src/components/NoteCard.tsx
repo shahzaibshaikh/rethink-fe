@@ -1,15 +1,15 @@
-import { Badge, Box, Card, Heading, Text } from '@chakra-ui/react';
-import React from 'react';
+import { Box, Heading, HStack, Text } from '@chakra-ui/react';
+import formatDate from '../utilities/dateFormatter';
 import FolderBadge from './FolderBadge';
-import HorizontalLine from './HorizontalLine';
 
 interface NoteCardProps {
   title: string;
   content: string;
   folder_name: string;
+  updated_at: string;
 }
 
-function NoteCard({ title, content, folder_name }: NoteCardProps) {
+function NoteCard({ title, content, updated_at, folder_name }: NoteCardProps) {
   return (
     <>
       <Box
@@ -35,8 +35,9 @@ function NoteCard({ title, content, folder_name }: NoteCardProps) {
           overflowWrap='break-word'
           mb={1}
         >
-          {content}
+          {formatDate(updated_at.substring(0, 10))} {'  '} &#8226; {'  '} {content}
         </Text>
+
         <FolderBadge folder_name={folder_name} />
       </Box>
     </>

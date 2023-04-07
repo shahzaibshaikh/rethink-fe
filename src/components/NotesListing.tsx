@@ -14,7 +14,7 @@ const notes = [
     title: 'Abiha note with proper folder 1',
     content: 'Some random text',
     created_at: '2023-04-05T19:26:01.119Z',
-    updated_at: '2023-04-05T19:27:03.576Z'
+    updated_at: '2023-04-01T19:27:03.576Z'
   },
   {
     folder: {
@@ -26,7 +26,7 @@ const notes = [
     content:
       'Some random text 2 aksjdn akjsnd kjansd kjansdkj anskdj naksjdn kjasnd jkasndkj ansdkjnas kjdn ',
     created_at: '2023-04-05T19:32:33.005Z',
-    updated_at: '2023-04-05T19:32:33.005Z'
+    updated_at: '2023-06-05T19:32:33.005Z'
   },
   {
     folder: {
@@ -114,6 +114,7 @@ function NotesListing() {
                 title={note.title}
                 content={note.content}
                 folder_name={note.folder.name}
+                updated_at={note.updated_at}
               />
               {count !== notesLength && <HorizontalLine />}
             </>
