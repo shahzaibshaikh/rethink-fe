@@ -99,15 +99,16 @@ function NotesListing() {
           All notes
         </Heading>
       </HStack>
-
-      {notes.map(note => (
-        <NoteCard
-          key={note._id}
-          title={note.title}
-          content={note.content}
-          folder_name={note.folder.name}
-        />
-      ))}
+      <Box overflowY='auto' maxHeight='560px'>
+        {notes.map(note => (
+          <NoteCard
+            key={note._id}
+            title={note.title}
+            content={note.content}
+            folder_name={note.folder.name}
+          />
+        ))}
+      </Box>
     </Box>
   );
 }
