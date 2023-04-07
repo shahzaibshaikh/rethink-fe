@@ -1,8 +1,9 @@
-import { background, Box, HStack, Input, InputGroup } from '@chakra-ui/react';
-import { useRef, useState } from 'react';
+import { Box, HStack, Input, InputGroup } from '@chakra-ui/react';
+import { useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import MainFormMeta from './MainFormMeta';
 import NoteOptionsIcon from './NoteOptionsIcon';
+import '../styles/dark-rethink/skin.min.css';
 
 function MainForm() {
   const [formData, setFormData] = useState(
@@ -28,16 +29,15 @@ function MainForm() {
         <NoteOptionsIcon />
       </HStack>
       <MainFormMeta />
-      <Box>
+      <Box mt={6}>
         <Editor
           value={formData}
           apiKey='kryeq3b472lorx6bjwuoron2otj3s8ki1co9jprig0mqm1wh'
-          onChange={event => setFormData(event.target.value)}
-          initialValue={formData}
+          onEditorChange={setFormData}
           init={{
             height: 500,
-            menubar: true,
-            skin: 'tinymce-5-dark',
+            menubar: false,
+            skin: 'dark-rethink',
             content_css: '/tinymce.css',
             plugins: [
               'advlist',
@@ -57,10 +57,10 @@ function MainForm() {
               'code'
             ],
             toolbar:
-              'bold italic forecolor | alignleft aligncenter ' +
-              'alignright alignjustify | bullist numlist outdent indent | ',
+              'bold italic underline | forecolor | alignleft aligncenter ' +
+              'alignright alignjustify | bullist numlist | ',
 
-            content_style: 'body { font-family:Inter,sans-serif; font-size:13px }'
+            content_style: 'body { font-family:Inter,sans-serif; font-size:14px }'
           }}
         />
         <button onClick={log}>Log editor content</button>
