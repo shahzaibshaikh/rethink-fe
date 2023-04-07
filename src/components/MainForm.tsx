@@ -28,7 +28,7 @@ function MainForm() {
         <NoteOptionsIcon />
       </HStack>
       <MainFormMeta />
-      <>
+      <Box>
         <Editor
           value={formData}
           apiKey='kryeq3b472lorx6bjwuoron2otj3s8ki1co9jprig0mqm1wh'
@@ -44,7 +44,6 @@ function MainForm() {
               'autolink',
               'lists',
               'link',
-              'image',
               'charmap',
               'preview',
               'anchor',
@@ -65,7 +64,7 @@ function MainForm() {
           }}
         />
         <button onClick={log}>Log editor content</button>
-      </>
+      </Box>
     </Box>
   );
 }
