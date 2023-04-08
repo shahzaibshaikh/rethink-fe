@@ -1,6 +1,15 @@
-import { Box, Button, FormControl, FormLabel, Image, Input } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  Image,
+  Input,
+  Text
+} from '@chakra-ui/react';
 import bgImage from '../assets/stefan-cosma-muK4j9HjIrQ-unsplash.jpg';
 import brandImage from '../assets/rethink-logo-full.png';
+import { Link } from 'react-router-dom';
 
 function RegisterPage() {
   return (
@@ -67,6 +76,12 @@ function RegisterPage() {
               Sign up
             </Button>
           </form>
+          <Text fontSize='xs' fontWeight={600} mt={3}>
+            Already a user? Sign in{' '}
+            <Link to='/login' color='purple.600'>
+              <span style={{ color: '#6B46C1' }}>here</span>
+            </Link>
+          </Text>
         </Box>
       </Box>
     </Box>

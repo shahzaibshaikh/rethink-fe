@@ -1,8 +1,29 @@
-import { Box, Button, FormControl, FormLabel, Image, Input } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  FormControl,
+  FormLabel,
+  HStack,
+  Image,
+  Input,
+  Text
+} from '@chakra-ui/react';
 import bgImage from '../assets/stefan-cosma-muK4j9HjIrQ-unsplash.jpg';
 import brandImage from '../assets/rethink-logo-full.png';
+import { FormEvent, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function LoginPage() {
+  const [loginData, setLoginData] = useState({
+    email: '',
+    password: ''
+  });
+
+  function handleSubmit(event: FormEvent) {
+    event.preventDefault();
+    console.log(loginData);
+  }
+
   return (
     <Box
       height='100vh'
@@ -29,18 +50,34 @@ function LoginPage() {
           alignItems='center'
         >
           <Image src={brandImage} width={40} mb='6' />
-          <form style={{ width: '100%' }}>
+          <form style={{ width: '100%' }} onSubmit={handleSubmit}>
             <FormControl size='sm'>
               <FormLabel fontWeight={600} fontSize='sm'>
                 Email address
               </FormLabel>
-              <Input fontSize='sm' type='email' placeholder='Enter email' />
+              <Input
+                value={loginData.email}
+                onChange={event =>
+                  setLoginData({ ...loginData, email: event.target.value })
+                }
+                fontSize='sm'
+                type='email'
+                placeholder='Enter email'
+              />
             </FormControl>
             <FormControl mt='4' size='sm'>
               <FormLabel fontWeight={600} fontSize='sm'>
                 Password
               </FormLabel>
-              <Input fontSize='sm' type='password' placeholder='Enter password' />
+              <Input
+                value={loginData.password}
+                onChange={event =>
+                  setLoginData({ ...loginData, password: event.target.value })
+                }
+                fontSize='sm'
+                type='password'
+                placeholder='Enter password'
+              />
             </FormControl>
             <Button
               fontSize='sm'
@@ -55,6 +92,12 @@ function LoginPage() {
               Sign in
             </Button>
           </form>
+          <Text fontSize='xs' fontWeight={600} mt={3}>
+            Not a user? Sign up{' '}
+            <Link to='/register' color='purple.600'>
+              <span style={{ color: '#6B46C1' }}>here</span>
+            </Link>
+          </Text>
         </Box>
       </Box>
     </Box>

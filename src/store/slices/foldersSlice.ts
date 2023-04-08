@@ -1,10 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {
-  Error,
-  FolderData,
-  FolderInfo,
-  FolderState
-} from '../../interfaces/FolderInterfaces';
+import { Error, FolderInfo, FolderState } from '../../interfaces/FolderInterfaces';
 
 const initialState: FolderState = {
   loading: false,
@@ -23,17 +18,7 @@ const folderSlice: any = createSlice({
       state.error = action.payload;
     },
     setAllFolders: (state: any, action: PayloadAction<FolderInfo[]>) => {
-      state.data = {
-        ...state.data,
-        folders: action.payload
-      };
-      state.error = null;
-    },
-    setSelectedFolder: (state: any, action: PayloadAction<string>) => {
-      state.data = {
-        ...state.data,
-        selectedFolder: action.payload
-      };
+      state.data = action.payload;
       state.error = null;
     }
   }

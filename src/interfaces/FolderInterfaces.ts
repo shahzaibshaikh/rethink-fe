@@ -1,12 +1,7 @@
 export interface FolderState {
   loading: boolean;
   error: Error | null;
-  data: FolderData | null;
-}
-
-export interface FolderData {
-  folders: FolderInfo[];
-  selectedFolder: string;
+  data: FolderInfo[] | null;
 }
 
 export interface FolderInfo {
