@@ -14,9 +14,10 @@ function RichText() {
         apiKey='kryeq3b472lorx6bjwuoron2otj3s8ki1co9jprig0mqm1wh'
         onEditorChange={setFormData}
         init={{
-          height: '460px',
+          height: '480px',
           menubar: false,
           skin: 'dark-rethink',
+          resize: false,
           content_css: '/tinymce.css',
           plugins: [
             'advlist',
@@ -46,7 +47,6 @@ function RichText() {
       <HStack justifyContent='space-between' alignItems='center' mt={3}>
         <Button
           fontSize='sm'
-          borderRadius={20}
           colorScheme='red'
           variant='outline'
           _hover={{ bg: 'gray.700', color: 'gray.100' }}
@@ -55,7 +55,6 @@ function RichText() {
         </Button>
         <Button
           fontSize='sm'
-          borderRadius={20}
           colorScheme='purple'
           variant='outline'
           _hover={{ bg: 'gray.700', color: 'gray.100' }}

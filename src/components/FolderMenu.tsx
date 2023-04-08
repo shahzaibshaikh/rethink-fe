@@ -44,7 +44,6 @@ function FolderMenu() {
         mt={7}
         leftIcon={<AiOutlinePlusCircle size={20} />}
         width='100%'
-        borderRadius={20}
         color='white'
         bg='purple.600'
         variant='solid'
