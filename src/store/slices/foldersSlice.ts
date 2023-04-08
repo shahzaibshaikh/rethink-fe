@@ -24,6 +24,6 @@ const folderSlice: any = createSlice({
   }
 });
 
-export const { setLoading, setError, setData } = folderSlice.actions;
+export const { setLoading, setError, setAllFolders } = folderSlice.actions;
 
 export default folderSlice.reducer;

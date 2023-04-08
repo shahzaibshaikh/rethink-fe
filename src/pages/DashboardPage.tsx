@@ -1,10 +1,21 @@
 import { Grid, GridItem, Show } from '@chakra-ui/react';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import FolderMenu from '../components/FolderMenu';
 import MainForm from '../components/MainForm';
 import NotesListing from '../components/NotesListing';
+import useFolders from '../hooks/useFolders';
 
 function DashboardPage() {
+  const navigate = useNavigate();
+  const { error: folderError, data: folderData, loading: folderLoading } = useFolders();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) navigate('/login');
+  }, []);
+
   return (
     <Grid
       gridTemplateAreas={{ lg: `"aside center main"`, base: `"center main"` }}
