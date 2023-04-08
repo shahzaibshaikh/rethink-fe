@@ -8,7 +8,7 @@ import { MouseEventHandler } from 'react';
 
 interface FolderMenuProps {
   folders: FolderInfo[] | null;
-  setSelectFolder: (folder_id: string) => void;
+  setSelectFolder: (folder_id: string, folder_name: string) => void;
 }
 
 function FolderMenu({ folders, setSelectFolder }: FolderMenuProps) {
@@ -36,7 +36,7 @@ function FolderMenu({ folders, setSelectFolder }: FolderMenuProps) {
       <HStack
         color='gray.500'
         _hover={{ color: 'white', transition: '300ms' }}
-        onClick={() => setSelectFolder('all')}
+        onClick={() => setSelectFolder('all', 'All notes')}
         cursor='pointer'
       >
         <BsFillFolderFill size={16} />
@@ -48,7 +48,7 @@ function FolderMenu({ folders, setSelectFolder }: FolderMenuProps) {
       {folders &&
         folders.map(folder => (
           <HStack
-            onClick={() => setSelectFolder(folder._id)}
+            onClick={() => setSelectFolder(folder._id, folder.name)}
             cursor='pointer'
             key={folder._id}
             color='gray.500'

@@ -6,18 +6,25 @@ import FolderMenu from '../components/FolderMenu';
 import MainForm from '../components/MainForm';
 import NotesListing from '../components/NotesListing';
 import useFolders from '../hooks/useFolders';
+import useNotes from '../hooks/useNotes';
 import { FolderState } from '../interfaces/FolderInterfaces';
+import { NoteState } from '../interfaces/NoteInterface';
 
 function DashboardPage() {
   const navigate = useNavigate();
-  const [selectedFolder, setSelectedFolder] = useState<string>();
+  const [selectedFolder, setSelectedFolder] = useState({
+    folder_id: '',
+    folder_name: ''
+  });
   const { data: folderData, loading: folderLoading }: FolderState = useFolders();
+  const { data: noteData, loading: noteLoading }: NoteState = useNotes(
+    selectedFolder.folder_id
+  );
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) navigate('/login');
-    console.log(selectedFolder);
-  }, [selectedFolder]);
+  }, []);
 
   return (
     <Grid
@@ -28,7 +35,9 @@ function DashboardPage() {
         <GridItem area='aside' background='gray.800' height='100vh' padding={8}>
           <FolderMenu
             folders={folderData}
-            setSelectFolder={(folder_id: string) => setSelectedFolder(folder_id)}
+            setSelectFolder={(folder_id: string) =>
+              setSelectedFolder({ ...selectedFolder, folder_id })
+            }
           />
         </GridItem>
       </Show>

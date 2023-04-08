@@ -1,29 +1,32 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { FolderState } from '../interfaces/FolderInterfaces';
+import { NoteState } from '../interfaces/NoteInterface';
 import apiClient from '../services/apiClient';
-import { setAllFolders, setError, setLoading } from '../store/slices/foldersSlice';
+import { setData, setError, setLoading } from '../store/slices/notesSlice';
 
-function useFolders() {
+function useNotes(folder_id?: string) {
   const dispatch = useDispatch();
-  const { loading, error, data }: FolderState = useSelector(
-    (state: any) => state.folders
-  );
+  const { loading, error, data }: NoteState = useSelector((state: any) => state.notes);
   const token = localStorage.getItem('token');
+  let route: string = '';
+
+  if (folder_id !== 'all') {
+    route = `/folder/${folder_id}`;
+  }
 
   useEffect(() => {
-    async function getFolders() {
+    async function getNotes() {
       try {
         dispatch(setLoading(true));
 
-        const response = await apiClient.get('/api/folders', {
+        const response = await apiClient.get(`/api/notes${route}`, {
           headers: {
             Authorization: 'Bearer ' + token,
             'Content-Type': 'application/json'
           }
         });
 
-        dispatch(setAllFolders(response.data.folders));
+        dispatch(setData(response.data.notes));
         return true;
       } catch (error: any) {
         dispatch(setError(error.response.data.error));
@@ -32,10 +35,10 @@ function useFolders() {
         dispatch(setLoading(false));
       }
     }
-    if (token) getFolders();
-  }, [token]);
+    if (token) getNotes();
+  }, [token, folder_id]);
 
   return { loading, error, data };
 }
 
-export default useFolders;
+export default useNotes;
