@@ -41,7 +41,7 @@ function FolderMenu() {
 
       <Button
         fontSize='sm'
-        mt='7'
+        mt={7}
         leftIcon={<AiOutlinePlusCircle size={20} />}
         width='100%'
         borderRadius={20}

@@ -1,9 +1,8 @@
-import { Box, HStack, Input, InputGroup } from '@chakra-ui/react';
+import { Box, Button, HStack, Input, InputGroup } from '@chakra-ui/react';
 import { useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import MainFormMeta from './MainFormMeta';
 import NoteOptionsIcon from './NoteOptionsIcon';
-import '../styles/dark-rethink/skin.min.css';
 
 function MainForm() {
   const [formData, setFormData] = useState(
@@ -35,7 +34,7 @@ function MainForm() {
           apiKey='kryeq3b472lorx6bjwuoron2otj3s8ki1co9jprig0mqm1wh'
           onEditorChange={setFormData}
           init={{
-            height: 500,
+            height: '460px',
             menubar: false,
             skin: 'dark-rethink',
             content_css: '/tinymce.css',
@@ -64,7 +63,26 @@ function MainForm() {
               'body { font-family:Inter,sans-serif; font-size:10px, line-height:1 }'
           }}
         />
-        <button onClick={log}>Log editor content</button>
+        <HStack justifyContent='space-between' alignItems='center' mt={3}>
+          <Button
+            fontSize='sm'
+            borderRadius={20}
+            colorScheme='red'
+            variant='outline'
+            _hover={{ bg: 'gray.700', color: 'gray.100' }}
+          >
+            Delete note
+          </Button>
+          <Button
+            fontSize='sm'
+            borderRadius={20}
+            colorScheme='purple'
+            variant='outline'
+            _hover={{ bg: 'gray.700', color: 'gray.100' }}
+          >
+            Save note
+          </Button>
+        </HStack>
       </Box>
     </Box>
   );
