@@ -11,7 +11,7 @@ function RichText() {
     <Box mt={6}>
       <Editor
         value={formData}
-        apiKey='kryeq3b472lorx6bjwuoron2otj3s8ki1co9jprig0mqm1wh'
+        apiKey={import.meta.env.VITE_TINYMCE_API_KEY}
         onEditorChange={setFormData}
         init={{
           height: '480px',
