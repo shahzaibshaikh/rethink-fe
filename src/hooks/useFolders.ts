@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { UserState } from '../interfaces/UserInterfaces';
+import { FolderState } from '../interfaces/FolderInterfaces';
 import apiClient from '../services/apiClient';
 import { setAllFolders, setError, setLoading } from '../store/slices/foldersSlice';
 
@@ -11,7 +11,9 @@ export interface LoginData {
 
 function useFolders() {
   const dispatch = useDispatch();
-  const { loading, error, data }: UserState = useSelector((state: any) => state.folders);
+  const { loading, error, data }: FolderState = useSelector(
+    (state: any) => state.folders
+  );
   const token = localStorage.getItem('token');
 
   useEffect(() => {

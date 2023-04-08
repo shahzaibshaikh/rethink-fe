@@ -6,10 +6,15 @@ import FolderMenu from '../components/FolderMenu';
 import MainForm from '../components/MainForm';
 import NotesListing from '../components/NotesListing';
 import useFolders from '../hooks/useFolders';
+import { FolderState } from '../interfaces/FolderInterfaces';
 
 function DashboardPage() {
   const navigate = useNavigate();
-  const { error: folderError, data: folderData, loading: folderLoading } = useFolders();
+  const {
+    error: folderError,
+    data: folderData,
+    loading: folderLoading
+  }: FolderState = useFolders();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -23,7 +28,7 @@ function DashboardPage() {
     >
       <Show above='lg'>
         <GridItem area='aside' background='gray.800' height='100vh' padding={8}>
-          <FolderMenu />
+          <FolderMenu folders={folderData} />
         </GridItem>
       </Show>
       <GridItem area='center' background='gray.700' height='100vh' padding={4}>
