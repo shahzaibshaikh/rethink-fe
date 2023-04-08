@@ -1,25 +1,20 @@
 import { Grid, GridItem, Show } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import FolderMenu from '../components/FolderMenu';
 import MainForm from '../components/MainForm';
 import NotesListing from '../components/NotesListing';
 import useFolders from '../hooks/useFolders';
 import useNotes from '../hooks/useNotes';
-import { FolderState } from '../interfaces/FolderInterfaces';
-import { NoteState } from '../interfaces/NoteInterface';
 
 function DashboardPage() {
   const navigate = useNavigate();
   const [selectedFolder, setSelectedFolder] = useState({
-    folder_id: '',
-    folder_name: ''
+    folder_id: 'all',
+    folder_name: 'All notes'
   });
-  const { data: folderData, loading: folderLoading }: FolderState = useFolders();
-  const { data: noteData, loading: noteLoading }: NoteState = useNotes(
-    selectedFolder.folder_id
-  );
+  useFolders();
+  useNotes(selectedFolder.folder_id);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -34,7 +29,6 @@ function DashboardPage() {
       <Show above='lg'>
         <GridItem area='aside' background='gray.800' height='100vh' padding={8}>
           <FolderMenu
-            folders={folderData}
             setSelectFolder={(folder_id: string) =>
               setSelectedFolder({ ...selectedFolder, folder_id })
             }

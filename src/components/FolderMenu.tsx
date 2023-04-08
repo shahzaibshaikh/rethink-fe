@@ -3,15 +3,15 @@ import brandImage from '../assets/rethink-logo-full.png';
 import { BsFillFolderFill } from 'react-icons/bs';
 import { HiFolderPlus } from 'react-icons/hi2';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
-import { FolderInfo } from '../interfaces/FolderInterfaces';
-import { MouseEventHandler } from 'react';
+import { FolderInfo, FolderState } from '../interfaces/FolderInterfaces';
+import { useSelector } from 'react-redux';
 
 interface FolderMenuProps {
-  folders: FolderInfo[] | null;
   setSelectFolder: (folder_id: string, folder_name: string) => void;
 }
 
-function FolderMenu({ folders, setSelectFolder }: FolderMenuProps) {
+function FolderMenu({ setSelectFolder }: FolderMenuProps) {
+  const { loading, data }: FolderState = useSelector((state: any) => state.folders);
   return (
     <div>
       <Image src={brandImage} width={36} />
@@ -45,8 +45,8 @@ function FolderMenu({ folders, setSelectFolder }: FolderMenuProps) {
         </Text>
       </HStack>
 
-      {folders &&
-        folders.map(folder => (
+      {data &&
+        data.map((folder: FolderInfo) => (
           <HStack
             onClick={() => setSelectFolder(folder._id, folder.name)}
             cursor='pointer'
