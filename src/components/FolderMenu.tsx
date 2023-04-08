@@ -4,12 +4,14 @@ import { BsFillFolderFill } from 'react-icons/bs';
 import { HiFolderPlus } from 'react-icons/hi2';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { FolderInfo } from '../interfaces/FolderInterfaces';
+import { MouseEventHandler } from 'react';
 
 interface FolderMenuProps {
   folders: FolderInfo[] | null;
+  setSelectFolder: (folder_id: string) => void;
 }
 
-function FolderMenu({ folders }: FolderMenuProps) {
+function FolderMenu({ folders, setSelectFolder }: FolderMenuProps) {
   return (
     <div>
       <Image src={brandImage} width={36} />
@@ -31,7 +33,12 @@ function FolderMenu({ folders }: FolderMenuProps) {
         Folders
       </Heading>
 
-      <HStack color='gray.500' _hover={{ color: 'white', transition: '300ms' }}>
+      <HStack
+        color='gray.500'
+        _hover={{ color: 'white', transition: '300ms' }}
+        onClick={() => setSelectFolder('all')}
+        cursor='pointer'
+      >
         <BsFillFolderFill size={16} />
         <Text fontSize='14px' fontWeight={700}>
           All notes
@@ -41,6 +48,8 @@ function FolderMenu({ folders }: FolderMenuProps) {
       {folders &&
         folders.map(folder => (
           <HStack
+            onClick={() => setSelectFolder(folder._id)}
+            cursor='pointer'
             key={folder._id}
             color='gray.500'
             mt={4}

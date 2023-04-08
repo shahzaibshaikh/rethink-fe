@@ -1,4 +1,5 @@
 import { Box, Heading, HStack } from '@chakra-ui/react';
+import { useEffect } from 'react';
 import { BsFillFolderFill } from 'react-icons/bs';
 import HorizontalLine from './HorizontalLine';
 import NoteCard from './NoteCard';
