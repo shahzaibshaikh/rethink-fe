@@ -10,6 +10,11 @@ export interface NoteInfo {
   content: string;
   created_at: string;
   updated_at: string;
+  is_favourite?: string;
+  folder?: {
+    folder_id: string;
+    name: string;
+  };
 }
 
 export interface Error {

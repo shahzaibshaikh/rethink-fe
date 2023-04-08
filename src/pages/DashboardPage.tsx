@@ -29,14 +29,14 @@ function DashboardPage() {
       <Show above='lg'>
         <GridItem area='aside' background='gray.800' height='100vh' padding={8}>
           <FolderMenu
-            setSelectFolder={(folder_id: string) =>
-              setSelectedFolder({ ...selectedFolder, folder_id })
-            }
+            setSelectFolder={(folder_id: string, folder_name: string) => {
+              setSelectedFolder({ ...selectedFolder, folder_id, folder_name });
+            }}
           />
         </GridItem>
       </Show>
       <GridItem area='center' background='gray.700' height='100vh' padding={4}>
-        <NotesListing />
+        <NotesListing folder_name={selectedFolder.folder_name} />
       </GridItem>
       <GridItem area='main' background='gray.600' height='100vh' padding={6}>
         <MainForm />
