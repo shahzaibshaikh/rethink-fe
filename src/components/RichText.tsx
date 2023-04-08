@@ -45,18 +45,14 @@ function RichText() {
         }}
       />
       <HStack justifyContent='space-between' alignItems='center' mt={3}>
-        <Button
-          fontSize='sm'
-          colorScheme='red'
-          variant='outline'
-          _hover={{ bg: 'gray.700', color: 'gray.100' }}
-        >
+        <Button fontSize='sm' colorScheme='red' variant='outline'>
           Delete note
         </Button>
         <Button
           fontSize='sm'
-          colorScheme='purple'
-          variant='outline'
+          color='white'
+          variant='solid'
+          bg='purple.600'
           _hover={{ bg: 'gray.700', color: 'gray.100' }}
         >
           Save note
