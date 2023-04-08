@@ -5,13 +5,35 @@ import {
   FormLabel,
   Image,
   Input,
+  Spinner,
   Text
 } from '@chakra-ui/react';
 import bgImage from '../assets/stefan-cosma-muK4j9HjIrQ-unsplash.jpg';
 import brandImage from '../assets/rethink-logo-full.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { FormEvent, useState } from 'react';
+import useRegister from '../hooks/useRegister';
 
 function RegisterPage() {
+  const navigate = useNavigate();
+  const [registerData, setRegisterData] = useState({
+    first_name: '',
+    last_name: '',
+    email: '',
+    password: ''
+  });
+
+  const { loading, register } = useRegister();
+
+  function handleSubmit(event: FormEvent) {
+    event.preventDefault();
+    register(registerData).then(success => {
+      if (success) {
+        navigate('/');
+      }
+    });
+  }
+
   return (
     <Box
       height='100vh'
@@ -38,44 +60,80 @@ function RegisterPage() {
           alignItems='center'
         >
           <Image src={brandImage} width={40} mb='6' />
-          <form style={{ width: '100%' }}>
-            <FormControl size='sm'>
-              <FormLabel fontWeight={600} fontSize='sm'>
-                First name
-              </FormLabel>
-              <Input fontSize='sm' type='text' placeholder='Enter first name' />
-            </FormControl>
-            <FormControl mt='4' size='sm'>
-              <FormLabel fontWeight={600} fontSize='sm'>
-                Last name
-              </FormLabel>
-              <Input fontSize='sm' type='text' placeholder='Enter last name' />
-            </FormControl>
-            <FormControl mt='4' size='sm'>
-              <FormLabel fontWeight={600} fontSize='sm'>
-                Email address
-              </FormLabel>
-              <Input fontSize='sm' type='email' placeholder='Enter email' />
-            </FormControl>
-            <FormControl mt='4' size='sm'>
-              <FormLabel fontWeight={600} fontSize='sm'>
-                Password
-              </FormLabel>
-              <Input fontSize='sm' type='password' placeholder='Enter password' />
-            </FormControl>
-            <Button
-              fontSize='sm'
-              mt='8'
-              width='100%'
-              color='gray.800'
-              bg='white'
-              variant='solid'
-              type='submit'
-              _hover={{ bg: 'gray.700', color: 'gray.100' }}
-            >
-              Sign up
-            </Button>
-          </form>
+          {loading ? (
+            <Spinner size='xl' color='purple.500' mb={6} mt={4} />
+          ) : (
+            <form style={{ width: '100%' }} onSubmit={handleSubmit}>
+              <FormControl size='sm'>
+                <FormLabel fontWeight={600} fontSize='sm'>
+                  First name
+                </FormLabel>
+                <Input
+                  value={registerData.first_name}
+                  onChange={event =>
+                    setRegisterData({ ...registerData, first_name: event.target.value })
+                  }
+                  fontSize='sm'
+                  type='text'
+                  placeholder='Enter first name'
+                />
+              </FormControl>
+              <FormControl mt='4' size='sm'>
+                <FormLabel fontWeight={600} fontSize='sm'>
+                  Last name
+                </FormLabel>
+                <Input
+                  value={registerData.last_name}
+                  onChange={event =>
+                    setRegisterData({ ...registerData, last_name: event.target.value })
+                  }
+                  fontSize='sm'
+                  type='text'
+                  placeholder='Enter last name'
+                />
+              </FormControl>
+              <FormControl mt='4' size='sm'>
+                <FormLabel fontWeight={600} fontSize='sm'>
+                  Email address
+                </FormLabel>
+                <Input
+                  value={registerData.email}
+                  onChange={event =>
+                    setRegisterData({ ...registerData, email: event.target.value })
+                  }
+                  fontSize='sm'
+                  type='email'
+                  placeholder='Enter email'
+                />
+              </FormControl>
+              <FormControl mt='4' size='sm'>
+                <FormLabel fontWeight={600} fontSize='sm'>
+                  Password
+                </FormLabel>
+                <Input
+                  value={registerData.password}
+                  onChange={event =>
+                    setRegisterData({ ...registerData, password: event.target.value })
+                  }
+                  fontSize='sm'
+                  type='password'
+                  placeholder='Enter password'
+                />
+              </FormControl>
+              <Button
+                fontSize='sm'
+                mt='8'
+                width='100%'
+                color='gray.800'
+                bg='white'
+                variant='solid'
+                type='submit'
+                _hover={{ bg: 'gray.700', color: 'gray.100' }}
+              >
+                Sign up
+              </Button>
+            </form>
+          )}
           <Text fontSize='xs' fontWeight={600} mt={3}>
             Already a user? Sign in{' '}
             <Link to='/login' color='purple.600'>
