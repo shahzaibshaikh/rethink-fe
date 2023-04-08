@@ -1,4 +1,5 @@
 import { Box, Heading, HStack, Text } from '@chakra-ui/react';
+import { BsStar, BsStarFill } from 'react-icons/bs';
 import formatDate from '../utilities/dateFormatter';
 import FolderBadge from './FolderBadge';
 
@@ -38,7 +39,10 @@ function NoteCard({ title, content, updated_at, folder_name }: NoteCardProps) {
           {formatDate(updated_at.substring(0, 10))} {'  '} &#8226; {'  '} {content}
         </Text>
 
-        <FolderBadge folder_name={folder_name} />
+        <HStack justifyContent='space-between' alignItems='center'>
+          <FolderBadge folder_name={folder_name} />
+          <BsStar size={14} />
+        </HStack>
       </Box>
     </>
   );

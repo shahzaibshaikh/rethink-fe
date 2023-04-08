@@ -60,7 +60,8 @@ function MainForm() {
               'blocks | bold | italic | underline  | forecolor | alignleft | aligncenter ' +
               'alignright | alignjustify | bullist | numlist | blockquote | hr ',
 
-            content_style: 'body { font-family:Inter,sans-serif; font-size:13px }'
+            content_style:
+              'body { font-family:Inter,sans-serif; font-size:10px, line-height:1 }'
           }}
         />
         <button onClick={log}>Log editor content</button>
