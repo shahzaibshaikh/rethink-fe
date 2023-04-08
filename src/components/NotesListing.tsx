@@ -12,9 +12,9 @@ interface NoteListingProps {
 
 function NotesListing({ folder_name }: NoteListingProps) {
   const { loading, data }: NoteState = useSelector((state: any) => state.notes);
+
   const notesLength: number = data?.length ?? 0;
   let count = 0;
-  console.log(data);
 
   return (
     <Box>
@@ -38,12 +38,13 @@ function NotesListing({ folder_name }: NoteListingProps) {
               count++;
             }
             return (
-              <Box key={note._id}>
+              <Box key={note?._id}>
                 <NoteCard
-                  title={note.title}
-                  content={note.content}
+                  title={note?.title}
+                  content={note?.content}
                   folder_name={note?.folder?.name ?? ''}
-                  updated_at={note.updated_at}
+                  updated_at={note?.updated_at}
+                  is_favorite={note?.is_favorite}
                 />
                 {count !== notesLength && <HorizontalLine />}
               </Box>

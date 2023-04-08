@@ -8,15 +8,17 @@ import { useSelector } from 'react-redux';
 
 interface FolderMenuProps {
   setSelectFolder: (folder_id: string, folder_name: string) => void;
+  setEditorStatus: (flag: boolean) => void;
 }
 
-function FolderMenu({ setSelectFolder }: FolderMenuProps) {
+function FolderMenu({ setSelectFolder, setEditorStatus }: FolderMenuProps) {
   const { loading, data }: FolderState = useSelector((state: any) => state.folders);
   return (
     <div>
       <Image src={brandImage} width={36} />
 
       <Button
+        onClick={() => setEditorStatus(true)}
         fontSize='sm'
         mt={7}
         leftIcon={<HiPencilSquare size={20} />}

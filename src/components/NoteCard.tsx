@@ -8,9 +8,16 @@ interface NoteCardProps {
   content: string;
   folder_name: string;
   updated_at: string;
+  is_favorite: boolean;
 }
 
-function NoteCard({ title, content, updated_at, folder_name }: NoteCardProps) {
+function NoteCard({
+  title,
+  content,
+  updated_at,
+  folder_name,
+  is_favorite
+}: NoteCardProps) {
   return (
     <>
       <Box
@@ -41,7 +48,7 @@ function NoteCard({ title, content, updated_at, folder_name }: NoteCardProps) {
 
         <HStack justifyContent='space-between' alignItems='center'>
           <FolderBadge folder_name={folder_name} />
-          <BsStar size={14} />
+          {!is_favorite ? <BsStar size={14} /> : <BsStarFill size={14} color='#6B46C1' />}
         </HStack>
       </Box>
     </>

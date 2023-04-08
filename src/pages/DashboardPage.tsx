@@ -31,6 +31,7 @@ function DashboardPage() {
       <Show above='lg'>
         <GridItem area='aside' background='gray.800' height='100vh' padding={8}>
           <FolderMenu
+            setEditorStatus={(value: boolean) => setIsEditorReady(value)}
             setSelectFolder={(folder_id: string, folder_name: string) => {
               setSelectedFolder({ ...selectedFolder, folder_id, folder_name });
             }}
