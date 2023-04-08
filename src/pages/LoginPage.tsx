@@ -3,7 +3,6 @@ import {
   Button,
   FormControl,
   FormLabel,
-  HStack,
   Image,
   Input,
   Text
@@ -12,6 +11,7 @@ import bgImage from '../assets/stefan-cosma-muK4j9HjIrQ-unsplash.jpg';
 import brandImage from '../assets/rethink-logo-full.png';
 import { FormEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
+import useLogin from '../hooks/useLogin';
 
 function LoginPage() {
   const [loginData, setLoginData] = useState({
@@ -19,9 +19,11 @@ function LoginPage() {
     password: ''
   });
 
+  const { error, login } = useLogin();
+
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    console.log(loginData);
+    login(loginData);
   }
 
   return (
@@ -41,7 +43,7 @@ function LoginPage() {
           background='rgba(0,0,0,0.5)'
           backdropFilter='blur(8px)'
           padding={10}
-          width='24%'
+          width='350px'
           borderRadius='md'
           boxShadow='md'
           display='flex'

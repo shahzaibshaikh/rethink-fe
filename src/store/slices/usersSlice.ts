@@ -24,6 +24,6 @@ const usersSlice: any = createSlice({
   }
 });
 
-export const { setLoading, setError, setData } = usersSlice.actions;
+export const { setLoading, setError, setUser } = usersSlice.actions;
 
 export default usersSlice.reducer;

@@ -29,7 +29,7 @@ function RegisterPage() {
           background='rgba(0,0,0,0.5)'
           backdropFilter='blur(8px)'
           padding={10}
-          width='24%'
+          width='350px'
           borderRadius='md'
           boxShadow='md'
           display='flex'
