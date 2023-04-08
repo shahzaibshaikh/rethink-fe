@@ -49,18 +49,18 @@ function MainForm() {
               'anchor',
               'searchreplace',
               'visualblocks',
-              'code',
+              'codesample',
               'fullscreen',
               'insertdatetime',
               'media',
               'table',
-              'code'
+              'formats'
             ],
             toolbar:
-              'bold italic underline | forecolor | alignleft aligncenter ' +
-              'alignright alignjustify | bullist numlist | ',
+              'blocks | bold | italic | underline  | forecolor | alignleft | aligncenter ' +
+              'alignright | alignjustify | bullist | numlist | blockquote | hr ',
 
-            content_style: 'body { font-family:Inter,sans-serif; font-size:14px }'
+            content_style: 'body { font-family:Inter,sans-serif; font-size:13px }'
           }}
         />
         <button onClick={log}>Log editor content</button>
