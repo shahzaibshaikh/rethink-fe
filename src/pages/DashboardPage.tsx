@@ -6,6 +6,7 @@ import MainForm from '../components/MainForm';
 import NotesListing from '../components/NotesListing';
 import useFolders from '../hooks/useFolders';
 import useNotes from '../hooks/useNotes';
+import NotePlaceholderPage from './NotePlaceholderPage';
 
 function DashboardPage() {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ function DashboardPage() {
     folder_id: 'all',
     folder_name: 'All notes'
   });
+  const [isEditorReady, setIsEditorReady] = useState(false);
   useFolders();
   useNotes(selectedFolder.folder_id);
 
@@ -39,7 +41,7 @@ function DashboardPage() {
         <NotesListing folder_name={selectedFolder.folder_name} />
       </GridItem>
       <GridItem area='main' background='gray.600' height='100vh' padding={6}>
-        <MainForm />
+        {isEditorReady ? <MainForm /> : <NotePlaceholderPage />}
       </GridItem>
     </Grid>
   );

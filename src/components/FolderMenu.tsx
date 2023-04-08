@@ -2,7 +2,7 @@ import { Button, Heading, HStack, Image, Text } from '@chakra-ui/react';
 import brandImage from '../assets/rethink-logo-full.png';
 import { BsFillFolderFill } from 'react-icons/bs';
 import { HiFolderPlus } from 'react-icons/hi2';
-import { AiOutlinePlusCircle } from 'react-icons/ai';
+import { HiPencilSquare } from 'react-icons/hi2';
 import { FolderInfo, FolderState } from '../interfaces/FolderInterfaces';
 import { useSelector } from 'react-redux';
 
@@ -19,7 +19,7 @@ function FolderMenu({ setSelectFolder }: FolderMenuProps) {
       <Button
         fontSize='sm'
         mt={7}
-        leftIcon={<AiOutlinePlusCircle size={20} />}
+        leftIcon={<HiPencilSquare size={20} />}
         width='100%'
         color='white'
         bg='purple.600'
