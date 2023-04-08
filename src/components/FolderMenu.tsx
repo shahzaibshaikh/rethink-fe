@@ -46,7 +46,7 @@ function FolderMenu() {
         width='100%'
         borderRadius={20}
         color='white'
-        bg='purple.700'
+        bg='purple.600'
         variant='solid'
         _hover={{ bg: 'gray.700', color: 'gray.100' }}
       >
