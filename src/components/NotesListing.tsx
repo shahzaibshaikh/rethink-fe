@@ -42,7 +42,7 @@ function NotesListing({ folder_name }: NoteListingProps) {
                 <NoteCard
                   title={note.title}
                   content={note.content}
-                  folder_name={note?.folder?.name}
+                  folder_name={note?.folder?.name ?? ''}
                   updated_at={note.updated_at}
                 />
                 {count !== notesLength && <HorizontalLine />}
