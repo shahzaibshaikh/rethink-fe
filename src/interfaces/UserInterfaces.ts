@@ -1,7 +1,10 @@
+import { LoginData } from '../hooks/useLogin';
+
 export interface UserState {
   loading: boolean;
   error: Error | null;
   data: User | null;
+  login?: (loginData: LoginData) => Promise<void>;
 }
 
 export interface User {

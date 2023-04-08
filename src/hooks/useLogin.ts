@@ -1,29 +1,21 @@
-import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { User } from '../interfaces/UserInterfaces';
+import { UserState } from '../interfaces/UserInterfaces';
 import apiClient from '../services/apiClient';
 import { setUser, setError, setLoading } from '../store/slices/usersSlice';
 
-interface LoginData {
+export interface LoginData {
   email: string;
   password: string;
 }
 
-interface UseLogin {
-  login: (loginData: LoginData) => Promise<void>;
-  isLoading: boolean;
-  error: string | null;
-}
-
-function useLogin(): UseLogin {
+function useLogin() {
   const dispatch = useDispatch();
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setLocalError] = useState<string | null>(null);
+  const { loading, error, data }: UserState = useSelector((state: any) => state.user);
 
   async function login(loginData: LoginData) {
     try {
       dispatch(setLoading(true));
-      setIsLoading(true);
+
       const response = await apiClient.post('/api/users/login', {
         headers: {
           'Content-Type': 'application/json'
@@ -34,16 +26,16 @@ function useLogin(): UseLogin {
 
       dispatch(setUser(response.data.user));
       localStorage.setItem('token', response.data.token);
+      return true;
     } catch (error: any) {
-      dispatch(setError(error.message));
-      setLocalError(error.message);
+      dispatch(setError(error.response.data.error));
+      return false;
     } finally {
       dispatch(setLoading(false));
-      setIsLoading(false);
     }
   }
 
-  return { login, isLoading, error };
+  return { login, loading, error, data };
 }
 
 export default useLogin;

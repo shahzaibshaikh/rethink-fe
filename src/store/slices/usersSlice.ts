@@ -20,6 +20,9 @@ const usersSlice: any = createSlice({
     setUser: (state, action: PayloadAction<User>) => {
       state.data = action.payload;
       state.error = null;
+    },
+    logoutUser: (state, action: PayloadAction) => {
+      state.data = null;
     }
   }
 });
