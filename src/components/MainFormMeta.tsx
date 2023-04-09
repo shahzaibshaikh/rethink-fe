@@ -1,8 +1,14 @@
 import { Box, HStack, Text } from '@chakra-ui/react';
 import { BsFillCalendar3WeekFill, BsFillFolderFill } from 'react-icons/bs';
+import formatDate from '../utilities/dateFormatter';
 import HorizontalLine from './HorizontalLine';
 
-function MainFormMeta() {
+interface MainFormMetaProps {
+  date: string;
+  folder_name: string;
+}
+
+function MainFormMeta({ date, folder_name }: MainFormMetaProps) {
   return (
     <Box>
       <HStack gap={14} fontWeight={600} fontSize='13px' color='gray.500' mb={2} mt={6}>
@@ -14,7 +20,7 @@ function MainFormMeta() {
             <Text>Date</Text>
           </Box>
         </HStack>
-        <Text color='white'>21/06/2022</Text>
+        <Text color='white'>{formatDate(date.substring(0, 10))}</Text>
       </HStack>
       <HorizontalLine />
 
@@ -27,7 +33,7 @@ function MainFormMeta() {
             <Text>Folder</Text>
           </Box>
         </HStack>
-        <Text color='white'>Memories</Text>
+        <Text color='white'>{folder_name}</Text>
       </HStack>
       <HorizontalLine />
     </Box>

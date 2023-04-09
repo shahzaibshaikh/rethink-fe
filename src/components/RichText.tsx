@@ -2,14 +2,17 @@ import { Box, Button, HStack } from '@chakra-ui/react';
 import { useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 
-function RichText() {
-  const [formData, setFormData] = useState('Write your thoughts here.');
-  const log = () => {
-    console.log(formData);
-  };
+interface RichTextProps {
+  content?: string;
+}
+
+function RichText({ content }: RichTextProps) {
+  const [formData, setFormData] = useState<string>();
+
   return (
     <Box mt={6}>
       <Editor
+        initialValue={content ? content : 'Write your thoughts here.'}
         value={formData}
         apiKey={import.meta.env.VITE_TINYMCE_API_KEY}
         onEditorChange={setFormData}
@@ -33,8 +36,7 @@ function RichText() {
             'fullscreen',
             'insertdatetime',
             'media',
-            'table',
-            'formats'
+            'table'
           ],
           toolbar:
             'blocks | bold | italic | underline  | forecolor | alignleft | aligncenter ' +

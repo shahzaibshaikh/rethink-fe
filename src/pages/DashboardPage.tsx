@@ -44,7 +44,10 @@ function DashboardPage() {
       <GridItem area='center' background='gray.700' height='100vh' padding={4}>
         <NotesListing
           folder_name={selectedFolder.folder_name}
-          setNoteDetail={(note_id: string) => setSelectedNote(note_id)}
+          setNoteDetail={(note_id: string) => {
+            setSelectedNote(note_id);
+            setIsEditorReady(true);
+          }}
         />
       </GridItem>
       <GridItem area='main' background='gray.600' height='100vh' padding={6}>

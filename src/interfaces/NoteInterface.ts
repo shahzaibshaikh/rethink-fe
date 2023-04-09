@@ -4,6 +4,12 @@ export interface NoteState {
   data: NoteInfo[] | null;
 }
 
+export interface NoteStateOne {
+  error: Error | null;
+  loading: boolean;
+  data: NoteInfo | null;
+}
+
 export interface NoteInfo {
   _id: string;
   title: string;
