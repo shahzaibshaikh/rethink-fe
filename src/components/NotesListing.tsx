@@ -8,9 +8,10 @@ import SearchInput from './SearchInput';
 
 interface NoteListingProps {
   folder_name: string;
+  setNoteDetail: (note_id: string) => void;
 }
 
-function NotesListing({ folder_name }: NoteListingProps) {
+function NotesListing({ folder_name, setNoteDetail }: NoteListingProps) {
   const { loading, data }: NoteState = useSelector((state: any) => state.notes);
 
   const notesLength: number = data?.length ?? 0;
@@ -38,7 +39,7 @@ function NotesListing({ folder_name }: NoteListingProps) {
               count++;
             }
             return (
-              <Box key={note?._id}>
+              <Box key={note?._id} onClick={() => setNoteDetail(note._id)}>
                 <NoteCard
                   title={note?.title}
                   content={note?.content}

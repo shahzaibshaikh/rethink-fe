@@ -5,6 +5,7 @@ import FolderMenu from '../components/FolderMenu';
 import MainForm from '../components/MainForm';
 import NotesListing from '../components/NotesListing';
 import useFolders from '../hooks/useFolders';
+import useNoteDetail from '../hooks/useNoteDetail';
 import useNotes from '../hooks/useNotes';
 import NotePlaceholderPage from './NotePlaceholderPage';
 
@@ -14,10 +15,11 @@ function DashboardPage() {
     folder_id: 'all',
     folder_name: 'All notes'
   });
-  const [selectedNote, setSelectedNote] = useState();
+  const [selectedNote, setSelectedNote] = useState<string | undefined>();
   const [isEditorReady, setIsEditorReady] = useState(false);
   useFolders();
   useNotes(selectedFolder.folder_id);
+  useNoteDetail(selectedNote);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -40,7 +42,10 @@ function DashboardPage() {
         </GridItem>
       </Show>
       <GridItem area='center' background='gray.700' height='100vh' padding={4}>
-        <NotesListing folder_name={selectedFolder.folder_name} />
+        <NotesListing
+          folder_name={selectedFolder.folder_name}
+          setNoteDetail={(note_id: string) => setSelectedNote(note_id)}
+        />
       </GridItem>
       <GridItem area='main' background='gray.600' height='100vh' padding={6}>
         {isEditorReady ? <MainForm /> : <NotePlaceholderPage />}
