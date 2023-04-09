@@ -14,12 +14,13 @@ function RichText() {
     data?.content ? setIsExistingNote(true) : setIsExistingNote(false);
   }, [isExistingNote, data?.content]);
 
-  console.log(data?.content);
-
   return (
     <Box mt={6}>
       <Editor
-        value={data?.content ?? ''}
+        value={
+          data?.content ??
+          '<p><span style="color: rgb(137, 137, 137);">Write your thoughts here.</span></p>'
+        }
         apiKey={import.meta.env.VITE_TINYMCE_API_KEY}
         onEditorChange={event => {
           dispatch(setData({ ...data, content: event }));
