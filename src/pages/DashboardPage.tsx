@@ -7,7 +7,8 @@ import NotesListing from '../components/NotesListing';
 import useFolders from '../hooks/useFolders';
 import useNoteDetail from '../hooks/useNoteDetail';
 import useNotes from '../hooks/useNotes';
-import NotePlaceholderPage from './NotePlaceholderPage';
+import NotePlaceholderPage from '../components/NotePlaceholderPage';
+import NoteListingPlaceholder from '../components/NoteListingPlaceholder';
 
 function DashboardPage() {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ function DashboardPage() {
   }, []);
 
   useFolders();
-  useNotes(selectedFolder.folder_id);
+  const { data } = useNotes(selectedFolder.folder_id);
   useNoteDetail(selectedNote);
   return (
     <Grid
@@ -48,13 +49,17 @@ function DashboardPage() {
         </GridItem>
       </Show>
       <GridItem area='center' background='gray.700' height='100vh' padding={4}>
-        <NotesListing
-          folder_name={selectedFolder.folder_name}
-          setNoteDetail={(note_id: string) => {
-            setSelectedNote(note_id);
-            setIsEditorReady(true);
-          }}
-        />
+        {data ? (
+          <NotesListing
+            folder_name={selectedFolder.folder_name}
+            setNoteDetail={(note_id: string) => {
+              setSelectedNote(note_id);
+              setIsEditorReady(true);
+            }}
+          />
+        ) : (
+          <NoteListingPlaceholder />
+        )}
       </GridItem>
       <GridItem area='main' background='gray.600' height='100vh' padding={6}>
         {isEditorReady ? <MainForm /> : <NotePlaceholderPage />}
