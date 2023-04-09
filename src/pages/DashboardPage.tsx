@@ -14,6 +14,7 @@ function DashboardPage() {
     folder_id: 'all',
     folder_name: 'All notes'
   });
+  const [selectedNote, setSelectedNote] = useState();
   const [isEditorReady, setIsEditorReady] = useState(false);
   useFolders();
   useNotes(selectedFolder.folder_id);
