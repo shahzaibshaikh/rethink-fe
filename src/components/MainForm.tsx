@@ -2,7 +2,8 @@ import { Box, Button, HStack, Input, InputGroup } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NoteStateOne } from '../interfaces/NoteInterface';
-import { setData } from '../store/slices/noteDetailSlice';
+import apiClient from '../services/apiClient';
+import { setData, setError, setLoading } from '../store/slices/noteDetailSlice';
 import MainFormMeta from './MainFormMeta';
 import NoteOptionsIcon from './NoteOptionsIcon';
 import RichText from './RichText';
@@ -16,6 +17,41 @@ function MainForm() {
   useEffect(() => {
     data?._id ? setIsExistingNote(true) : setIsExistingNote(false);
   }, [isExistingNote, data]);
+
+  function handleSubmit() {
+    const payload = {
+      title: data?.title,
+      content: data?.content
+    };
+    const token = localStorage.getItem('token');
+    async function createNote() {
+      try {
+        dispatch(setLoading(true));
+        const response = await apiClient.post(
+          '/api/notes',
+          {
+            title: data?.title,
+            content: data?.content
+          },
+          {
+            headers: {
+              Authorization: 'Bearer ' + token,
+              'Content-Type': 'application/json'
+            }
+          }
+        );
+
+        dispatch(setData(response.data.note));
+        return true;
+      } catch (error: any) {
+        dispatch(setError(error.response.data.error));
+        return false;
+      } finally {
+        dispatch(setLoading(false));
+      }
+    }
+    if (token) createNote();
+  }
 
   return (
     <Box mt={3}>
@@ -52,6 +88,7 @@ function MainForm() {
           </Button>
         )}
         <Button
+          onClick={handleSubmit}
           fontSize='sm'
           color='white'
           variant='solid'

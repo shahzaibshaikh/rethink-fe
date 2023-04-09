@@ -23,6 +23,12 @@ export interface NoteInfo {
   };
 }
 
+export interface NotePayload {
+  title: string;
+  content: string;
+  folder_id?: string;
+}
+
 export interface Error {
   error: string;
 }

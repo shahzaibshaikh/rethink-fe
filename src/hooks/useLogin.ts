@@ -16,13 +16,18 @@ function useLogin() {
     try {
       dispatch(setLoading(true));
 
-      const response = await apiClient.post('/api/users/login', {
-        headers: {
-          'Content-Type': 'application/json'
+      const response = await apiClient.post(
+        '/api/users/login',
+        {
+          email: loginData.email,
+          password: loginData.password
         },
-        email: loginData.email,
-        password: loginData.password
-      });
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      );
 
       dispatch(setUser(response.data.user));
       localStorage.setItem('token', response.data.token);

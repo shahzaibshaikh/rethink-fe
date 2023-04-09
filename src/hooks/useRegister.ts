@@ -18,15 +18,20 @@ function useRegister() {
     try {
       dispatch(setLoading(true));
 
-      const response = await apiClient.post('/api/users/register', {
-        headers: {
-          'Content-Type': 'application/json'
+      const response = await apiClient.post(
+        '/api/users/register',
+        {
+          first_name: registerData.first_name,
+          last_name: registerData.last_name,
+          email: registerData.email,
+          password: registerData.password
         },
-        first_name: registerData.first_name,
-        last_name: registerData.last_name,
-        email: registerData.email,
-        password: registerData.password
-      });
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      );
 
       dispatch(setUser(response.data.user));
       localStorage.setItem('token', response.data.token);
