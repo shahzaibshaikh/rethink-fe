@@ -4,7 +4,8 @@ import { BsFillFolderFill } from 'react-icons/bs';
 import { HiFolderPlus } from 'react-icons/hi2';
 import { HiPencilSquare } from 'react-icons/hi2';
 import { FolderInfo, FolderState } from '../interfaces/FolderInterfaces';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setData } from '../store/slices/noteDetailSlice';
 
 interface FolderMenuProps {
   setSelectFolder: (folder_id: string, folder_name: string) => void;
@@ -12,13 +13,17 @@ interface FolderMenuProps {
 }
 
 function FolderMenu({ setSelectFolder, setEditorStatus }: FolderMenuProps) {
+  const dispatch = useDispatch();
   const { loading, data }: FolderState = useSelector((state: any) => state.folders);
   return (
     <div>
       <Image src={brandImage} width={36} />
 
       <Button
-        onClick={() => setEditorStatus(true)}
+        onClick={() => {
+          dispatch(setData(null));
+          setEditorStatus(true);
+        }}
         fontSize='sm'
         mt={7}
         leftIcon={<HiPencilSquare size={20} />}

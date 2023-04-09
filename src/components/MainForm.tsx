@@ -1,13 +1,16 @@
 import { Box, HStack, Input, InputGroup } from '@chakra-ui/react';
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NoteStateOne } from '../interfaces/NoteInterface';
+import { setData } from '../store/slices/noteDetailSlice';
 import MainFormMeta from './MainFormMeta';
 import NoteOptionsIcon from './NoteOptionsIcon';
 import RichText from './RichText';
 
 function MainForm() {
   const { loading, data }: NoteStateOne = useSelector((state: any) => state.noteDetail);
+  const dispatch = useDispatch();
+
   const now = new Date();
   return (
     <Box mt={3}>
@@ -15,8 +18,11 @@ function MainForm() {
         <form style={{ width: '100%' }}>
           <InputGroup>
             <Input
-              defaultValue={data?.title ? data.title : ''}
+              value={data?.title ?? ''}
               placeholder='Title'
+              onChange={event =>
+                dispatch(setData({ ...data, title: event.target.value }))
+              }
               border='none'
               background='gray.700'
               fontWeight={700}
@@ -29,7 +35,7 @@ function MainForm() {
         folder_name={data?.folder?.name ?? 'All notes'}
         date={data?.updated_at ?? now.toString()}
       />
-      <RichText content={data?.content ?? ''} />
+      <RichText />
     </Box>
   );
 }

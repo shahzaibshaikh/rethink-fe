@@ -1,26 +1,29 @@
 import { Box, Button, HStack } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setData } from '../store/slices/noteDetailSlice';
+import { NoteStateOne } from '../interfaces/NoteInterface';
 
-interface RichTextProps {
-  content?: string;
-}
-
-function RichText({ content }: RichTextProps) {
-  const [formData, setFormData] = useState<string>();
+function RichText() {
   const [isExistingNote, setIsExistingNote] = useState<boolean>(false);
+  const { loading, data }: NoteStateOne = useSelector((state: any) => state.noteDetail);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    content ? setIsExistingNote(true) : setIsExistingNote(false);
-  }, [isExistingNote, content]);
+    data?.content ? setIsExistingNote(true) : setIsExistingNote(false);
+  }, [isExistingNote, data?.content]);
+
+  console.log(data?.content);
 
   return (
     <Box mt={6}>
       <Editor
-        initialValue={content ? content : 'Write your thoughts here.'}
-        value={formData}
+        value={data?.content ?? ''}
         apiKey={import.meta.env.VITE_TINYMCE_API_KEY}
-        onEditorChange={setFormData}
+        onEditorChange={event => {
+          dispatch(setData({ ...data, content: event }));
+        }}
         init={{
           height: '480px',
           menubar: false,
