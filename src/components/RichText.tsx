@@ -1,5 +1,5 @@
 import { Box, Button, HStack } from '@chakra-ui/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 
 interface RichTextProps {
@@ -8,6 +8,11 @@ interface RichTextProps {
 
 function RichText({ content }: RichTextProps) {
   const [formData, setFormData] = useState<string>();
+  const [isExistingNote, setIsExistingNote] = useState<boolean>(false);
+
+  useEffect(() => {
+    content ? setIsExistingNote(true) : setIsExistingNote(false);
+  }, [isExistingNote, content]);
 
   return (
     <Box mt={6}>
@@ -46,10 +51,16 @@ function RichText({ content }: RichTextProps) {
             'body { font-family:Inter,sans-serif; font-size:10px, line-height:1 }'
         }}
       />
-      <HStack justifyContent='space-between' alignItems='center' mt={3}>
-        <Button fontSize='sm' colorScheme='red' variant='outline'>
-          Delete note
-        </Button>
+      <HStack
+        justifyContent={isExistingNote ? 'space-between' : 'flex-end'}
+        alignItems='center'
+        mt={3}
+      >
+        {isExistingNote && (
+          <Button fontSize='sm' colorScheme='red' variant='outline'>
+            Delete note
+          </Button>
+        )}
         <Button
           fontSize='sm'
           color='white'

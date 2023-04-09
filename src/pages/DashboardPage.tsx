@@ -17,15 +17,21 @@ function DashboardPage() {
   });
   const [selectedNote, setSelectedNote] = useState<string | undefined>();
   const [isEditorReady, setIsEditorReady] = useState(false);
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    const storedExpiration = localStorage.getItem('tokenExpiration');
+    if (
+      !storedToken ||
+      !storedExpiration ||
+      new Date().getTime() > parseInt(storedExpiration)
+    )
+      navigate('/login');
+  }, []);
+
   useFolders();
   useNotes(selectedFolder.folder_id);
   useNoteDetail(selectedNote);
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (!token) navigate('/login');
-  }, []);
-
   return (
     <Grid
       gridTemplateAreas={{ lg: `"aside center main"`, base: `"center main"` }}

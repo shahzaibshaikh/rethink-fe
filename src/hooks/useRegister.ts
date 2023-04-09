@@ -30,6 +30,8 @@ function useRegister() {
 
       dispatch(setUser(response.data.user));
       localStorage.setItem('token', response.data.token);
+      const expirationTime = new Date().getTime() + 43200 * 1000;
+      localStorage.setItem('tokenExpiration', expirationTime.toString());
       return true;
     } catch (error: any) {
       dispatch(setError(error.response.data.error));
