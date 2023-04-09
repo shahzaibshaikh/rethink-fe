@@ -6,21 +6,14 @@ import { setData } from '../store/slices/noteDetailSlice';
 import { NoteStateOne } from '../interfaces/NoteInterface';
 
 function RichText() {
-  const [isExistingNote, setIsExistingNote] = useState<boolean>(false);
   const { loading, data }: NoteStateOne = useSelector((state: any) => state.noteDetail);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    data?.content ? setIsExistingNote(true) : setIsExistingNote(false);
-  }, [isExistingNote, data?.content]);
-
+  const defaultString =
+    '<p><span style="color: rgb(137, 137, 137);">Write your thoughts here.</span></p>';
   return (
     <Box mt={6}>
       <Editor
-        value={
-          data?.content ??
-          '<p><span style="color: rgb(137, 137, 137);">Write your thoughts here.</span></p>'
-        }
+        value={data?.content ?? ''}
         apiKey={import.meta.env.VITE_TINYMCE_API_KEY}
         onEditorChange={event => {
           dispatch(setData({ ...data, content: event }));
@@ -55,26 +48,6 @@ function RichText() {
             'body { font-family:Inter,sans-serif; font-size:10px, line-height:1 }'
         }}
       />
-      <HStack
-        justifyContent={isExistingNote ? 'space-between' : 'flex-end'}
-        alignItems='center'
-        mt={3}
-      >
-        {isExistingNote && (
-          <Button fontSize='sm' colorScheme='red' variant='outline'>
-            Delete note
-          </Button>
-        )}
-        <Button
-          fontSize='sm'
-          color='white'
-          variant='solid'
-          bg='purple.600'
-          _hover={{ bg: 'gray.700', color: 'gray.100' }}
-        >
-          Save note
-        </Button>
-      </HStack>
     </Box>
   );
 }
