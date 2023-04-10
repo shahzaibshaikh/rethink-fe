@@ -18,6 +18,7 @@ function NoteCard({
   folder_name,
   is_favorite
 }: NoteCardProps) {
+  const parser = new DOMParser();
   return (
     <>
       <Box
@@ -44,7 +45,8 @@ function NoteCard({
           overflowWrap='break-word'
           mb={1}
         >
-          {formatDate(updated_at.substring(0, 10))} {'  '} &#8226; {'  '} {content}
+          {formatDate(updated_at.substring(0, 10))} {'  '} &#8226; {'  '}{' '}
+          {parser.parseFromString(content, 'text/html').documentElement.textContent}
         </Text>
 
         <HStack justifyContent='space-between' alignItems='center'>
