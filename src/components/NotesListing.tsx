@@ -37,10 +37,10 @@ function NotesListing({ folder_name, setNoteDetail }: NoteListingProps) {
       <Box overflowY='auto' maxHeight='560px'>
         {loading
           ? skeletons.map(skeleton => (
-              <>
-                <NoteCardSkeleton key={skeleton} />
+              <Box key={skeleton}>
+                <NoteCardSkeleton />
                 <HorizontalLine />
-              </>
+              </Box>
             ))
           : data &&
             data.map((note: NoteInfo) => {
