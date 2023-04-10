@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { NoteInfo, NoteState } from '../interfaces/NoteInterface';
 import HorizontalLine from './HorizontalLine';
 import NoteCard from './NoteCard';
+import NoteCardSkeleton from './NoteCardSkeleton';
 import SearchInput from './SearchInput';
 
 interface NoteListingProps {
@@ -13,7 +14,7 @@ interface NoteListingProps {
 
 function NotesListing({ folder_name, setNoteDetail }: NoteListingProps) {
   const { loading, data }: NoteState = useSelector((state: any) => state.notes);
-
+  const skeletons = [1, 2, 3, 4, 5];
   const notesLength: number = data?.length ?? 0;
   let count = 0;
 
@@ -32,25 +33,33 @@ function NotesListing({ folder_name, setNoteDetail }: NoteListingProps) {
           {folder_name}
         </Heading>
       </HStack>
+
       <Box overflowY='auto' maxHeight='560px'>
-        {data &&
-          data.map((note: NoteInfo) => {
-            {
-              count++;
-            }
-            return (
-              <Box key={note?._id} onClick={() => setNoteDetail(note._id)}>
-                <NoteCard
-                  title={note?.title}
-                  content={note?.content}
-                  folder_name={note?.folder?.name ?? ''}
-                  updated_at={note?.updated_at}
-                  is_favorite={note?.is_favorite}
-                />
-                {count !== notesLength && <HorizontalLine />}
-              </Box>
-            );
-          })}
+        {loading
+          ? skeletons.map(skeleton => (
+              <>
+                <NoteCardSkeleton key={skeleton} />
+                <HorizontalLine />
+              </>
+            ))
+          : data &&
+            data.map((note: NoteInfo) => {
+              {
+                count++;
+              }
+              return (
+                <Box key={note?._id} onClick={() => setNoteDetail(note._id)}>
+                  <NoteCard
+                    title={note?.title}
+                    content={note?.content}
+                    folder_name={note?.folder?.name ?? ''}
+                    updated_at={note?.updated_at}
+                    is_favorite={note?.is_favorite}
+                  />
+                  {count !== notesLength && <HorizontalLine />}
+                </Box>
+              );
+            })}
       </Box>
     </Box>
   );
