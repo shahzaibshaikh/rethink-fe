@@ -70,7 +70,27 @@ function useCreateNote() {
     }
   }
 
-  return { createNote, loading, error, data, saveNote };
+  async function deleteNote(token: string, id: string) {
+    try {
+      dispatch(setLoading(true));
+      const response = await apiClient.delete(`/api/notes/${id}`, {
+        headers: {
+          Authorization: 'Bearer ' + token,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      dispatch(setData(response.data.note));
+      return true;
+    } catch (error: any) {
+      dispatch(setError(error.response.data.error));
+      return false;
+    } finally {
+      dispatch(setLoading(false));
+    }
+  }
+
+  return { createNote, loading, error, data, saveNote, deleteNote };
 }
 
 export default useCreateNote;

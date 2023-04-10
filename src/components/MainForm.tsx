@@ -13,7 +13,7 @@ import useCreateNote from '../hooks/useCreateNote';
 function MainForm() {
   const [isExistingNote, setIsExistingNote] = useState<boolean>(false);
   const { loading, data }: NoteStateOne = useSelector((state: any) => state.noteDetail);
-  const { createNote, saveNote } = useCreateNote();
+  const { createNote, saveNote, deleteNote } = useCreateNote();
   const dispatch = useDispatch();
   const now = new Date();
 
@@ -21,7 +21,7 @@ function MainForm() {
     data?._id ? setIsExistingNote(true) : setIsExistingNote(false);
   }, [isExistingNote, data]);
 
-  function handleSubmit() {
+  function handleSave() {
     const payload = {
       title: data?.title as string,
       content: data?.content as string
@@ -30,6 +30,11 @@ function MainForm() {
 
     if (token && !isExistingNote) createNote(token, payload);
     if (token && isExistingNote) saveNote(token, { ...payload, id: data?._id });
+  }
+
+  function handleDelete() {
+    const token = localStorage.getItem('token');
+    if (token) deleteNote(token, data?._id as string);
   }
 
   return (
@@ -68,12 +73,17 @@ function MainForm() {
             mt={3}
           >
             {isExistingNote && (
-              <Button fontSize='sm' colorScheme='red' variant='outline'>
+              <Button
+                onClick={handleDelete}
+                fontSize='sm'
+                colorScheme='red'
+                variant='outline'
+              >
                 Delete note
               </Button>
             )}
             <Button
-              onClick={handleSubmit}
+              onClick={handleSave}
               fontSize='sm'
               color='white'
               variant='solid'
