@@ -33,9 +33,10 @@ function MainForm({ setEditorStatus }: MainFormProps) {
     };
     const token = localStorage.getItem('token');
 
-    if (token && !isExistingNote) createNote(token, payload).then(() => getNotes());
+    if (token && !isExistingNote)
+      createNote(token, payload).then(() => getNotes(token, ''));
     if (token && isExistingNote)
-      saveNote(token, { ...payload, id: data?._id }).then(() => getNotes());
+      saveNote(token, { ...payload, id: data?._id }).then(() => getNotes(token, ''));
   }
 
   function handleDelete() {
@@ -43,7 +44,7 @@ function MainForm({ setEditorStatus }: MainFormProps) {
     if (token)
       deleteNote(token, data?._id as string).then(() => {
         setEditorStatus(false);
-        getNotes();
+        getNotes(token, '');
       });
   }
 

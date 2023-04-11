@@ -18,10 +18,12 @@ function DashboardPage() {
   });
   const [selectedNote, setSelectedNote] = useState<string | undefined>();
   const [isEditorReady, setIsEditorReady] = useState(false);
+  const { loading, data, getNotes } = useNotes();
 
   useEffect(() => {
     const storedToken = localStorage.getItem('token');
     const storedExpiration = localStorage.getItem('tokenExpiration');
+    if (storedToken) getNotes(storedToken, selectedFolder.folder_id);
     if (
       !storedToken ||
       !storedExpiration ||
@@ -31,7 +33,6 @@ function DashboardPage() {
   }, []);
 
   useFolders();
-  const { loading, data } = useNotes(selectedFolder.folder_id);
   useNoteDetail(selectedNote);
   return (
     <Grid

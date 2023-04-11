@@ -4,41 +4,16 @@ import { NoteState } from '../interfaces/NoteInterface';
 import apiClient from '../services/apiClient';
 import { setData, setError, setLoading } from '../store/slices/notesSlice';
 
-function useNotes(folder_id?: string) {
+function useNotes() {
   const dispatch = useDispatch();
   const { loading, error, data }: NoteState = useSelector((state: any) => state.notes);
-  const token = localStorage.getItem('token');
-  let route: string = '';
 
-  if (folder_id !== 'all') {
-    route = `/folder/${folder_id}`;
-  }
+  async function getNotes(token: string, folder_id?: string) {
+    let route: string = '';
 
-  useEffect(() => {
-    async function getNotes() {
-      try {
-        dispatch(setLoading(true));
-
-        const response = await apiClient.get(`/api/notes${route}`, {
-          headers: {
-            Authorization: 'Bearer ' + token,
-            'Content-Type': 'application/json'
-          }
-        });
-
-        dispatch(setData(response.data.notes));
-        return true;
-      } catch (error: any) {
-        dispatch(setError(error.response.data.error));
-        return false;
-      } finally {
-        dispatch(setLoading(false));
-      }
+    if (folder_id !== 'all') {
+      route = `/folder/${folder_id}`;
     }
-    if (token) getNotes();
-  }, [token, folder_id]);
-
-  async function getNotes() {
     try {
       dispatch(setLoading(true));
 
