@@ -30,7 +30,7 @@ function DashboardPage() {
       new Date().getTime() > parseInt(storedExpiration)
     )
       navigate('/login');
-  }, []);
+  }, [selectedFolder]);
 
   useFolders();
   useNoteDetail(selectedNote);

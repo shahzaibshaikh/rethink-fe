@@ -14,10 +14,11 @@ function useNotes() {
     if (folder_id !== 'all') {
       route = `/folder/${folder_id}`;
     }
+
     try {
       dispatch(setLoading(true));
 
-      const response = await apiClient.get(`/api/notes`, {
+      const response = await apiClient.get(`/api/notes${route}`, {
         headers: {
           Authorization: 'Bearer ' + token,
           'Content-Type': 'application/json'
