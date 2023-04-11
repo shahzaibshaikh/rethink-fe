@@ -18,7 +18,7 @@ function DashboardPage() {
   });
   const [selectedNote, setSelectedNote] = useState<string | undefined>();
   const [isEditorReady, setIsEditorReady] = useState(false);
-  const { loading, data, getNotes } = useNotes();
+  const { data, getNotes } = useNotes();
   const { getFolders } = useFolders();
 
   useEffect(() => {
@@ -43,6 +43,7 @@ function DashboardPage() {
       <Show above='lg'>
         <GridItem area='aside' background='gray.800' height='100vh' padding={8}>
           <FolderMenu
+            selectedFolder={selectedFolder.folder_id}
             setEditorStatus={(value: boolean) => setIsEditorReady(value)}
             setSelectFolder={(folder_id: string, folder_name: string) => {
               setSelectedFolder({ ...selectedFolder, folder_id, folder_name });

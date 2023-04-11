@@ -10,9 +10,14 @@ import { setData } from '../store/slices/noteDetailSlice';
 interface FolderMenuProps {
   setSelectFolder: (folder_id: string, folder_name: string) => void;
   setEditorStatus: (flag: boolean) => void;
+  selectedFolder: string;
 }
 
-function FolderMenu({ setSelectFolder, setEditorStatus }: FolderMenuProps) {
+function FolderMenu({
+  setSelectFolder,
+  setEditorStatus,
+  selectedFolder
+}: FolderMenuProps) {
   const dispatch = useDispatch();
   const { loading, data }: FolderState = useSelector((state: any) => state.folders);
   return (
@@ -41,7 +46,7 @@ function FolderMenu({ setSelectFolder, setEditorStatus }: FolderMenuProps) {
       </Heading>
 
       <HStack
-        color='gray.500'
+        color={selectedFolder === 'all' ? 'white' : 'gray.500'}
         _hover={{ color: 'white', transition: '300ms' }}
         onClick={() => setSelectFolder('all', 'All notes')}
         cursor='pointer'
@@ -58,7 +63,7 @@ function FolderMenu({ setSelectFolder, setEditorStatus }: FolderMenuProps) {
             onClick={() => setSelectFolder(folder._id, folder.name)}
             cursor='pointer'
             key={folder._id}
-            color='gray.500'
+            color={selectedFolder === folder._id ? 'white' : 'gray.500'}
             mt={4}
             _hover={{ color: 'white', transition: '300ms' }}
           >
