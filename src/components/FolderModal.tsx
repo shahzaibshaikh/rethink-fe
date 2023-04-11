@@ -13,6 +13,7 @@ import {
   HStack
 } from '@chakra-ui/react';
 import React, { FormEvent, useState } from 'react';
+import useFolders from '../hooks/useFolders';
 
 interface FolderModalProps {
   isOpen: boolean;
@@ -21,10 +22,13 @@ interface FolderModalProps {
 
 function FolderModal({ isOpen, onClose }: FolderModalProps) {
   const [folderName, setFolderName] = useState<string>('');
+  const { createFolder } = useFolders();
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
     console.log(folderName);
+    const token = localStorage.getItem('token');
+    if (token) createFolder(token, folderName);
   }
 
   return (
