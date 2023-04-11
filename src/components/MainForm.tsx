@@ -37,7 +37,10 @@ function MainForm({ setEditorStatus }: MainFormProps) {
 
   function handleDelete() {
     const token = localStorage.getItem('token');
-    if (token) deleteNote(token, data?._id as string).then(() => setEditorStatus(false));
+    if (token)
+      deleteNote(token, data?._id as string).then(() => {
+        setEditorStatus(false);
+      });
   }
 
   return (
