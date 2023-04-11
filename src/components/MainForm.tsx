@@ -8,6 +8,7 @@ import MainFormMeta from './MainFormMeta';
 import NoteOptionsIcon from './NoteOptionsIcon';
 import RichText from './RichText';
 import useCreateNote from '../hooks/useCreateNote';
+import useNotes from '../hooks/useNotes';
 
 interface MainFormProps {
   setEditorStatus: (flag: boolean) => void;
@@ -16,6 +17,7 @@ interface MainFormProps {
 function MainForm({ setEditorStatus }: MainFormProps) {
   const [isExistingNote, setIsExistingNote] = useState<boolean>(false);
   const { loading, data }: NoteStateOne = useSelector((state: any) => state.noteDetail);
+  const { getNotes } = useNotes();
   const { createNote, saveNote, deleteNote } = useCreateNote();
   const dispatch = useDispatch();
   const now = new Date();
@@ -31,8 +33,9 @@ function MainForm({ setEditorStatus }: MainFormProps) {
     };
     const token = localStorage.getItem('token');
 
-    if (token && !isExistingNote) createNote(token, payload);
-    if (token && isExistingNote) saveNote(token, { ...payload, id: data?._id });
+    if (token && !isExistingNote) createNote(token, payload).then(() => getNotes());
+    if (token && isExistingNote)
+      saveNote(token, { ...payload, id: data?._id }).then(() => getNotes());
   }
 
   function handleDelete() {
@@ -40,6 +43,7 @@ function MainForm({ setEditorStatus }: MainFormProps) {
     if (token)
       deleteNote(token, data?._id as string).then(() => {
         setEditorStatus(false);
+        getNotes();
       });
   }
 

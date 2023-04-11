@@ -38,7 +38,28 @@ function useNotes(folder_id?: string) {
     if (token) getNotes();
   }, [token, folder_id]);
 
-  return { loading, error, data };
+  async function getNotes() {
+    try {
+      dispatch(setLoading(true));
+
+      const response = await apiClient.get(`/api/notes`, {
+        headers: {
+          Authorization: 'Bearer ' + token,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      dispatch(setData(response.data.notes));
+      return true;
+    } catch (error: any) {
+      dispatch(setError(error.response.data.error));
+      return false;
+    } finally {
+      dispatch(setLoading(false));
+    }
+  }
+
+  return { loading, error, data, getNotes };
 }
 
 export default useNotes;
