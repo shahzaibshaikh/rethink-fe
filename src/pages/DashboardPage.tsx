@@ -50,15 +50,7 @@ function DashboardPage() {
         </GridItem>
       </Show>
       <GridItem area='center' background='gray.700' height='100vh' padding={4}>
-        {loading ? (
-          <NotesListing
-            folder_name={selectedFolder.folder_name}
-            setNoteDetail={(note_id: string) => {
-              setSelectedNote(note_id);
-              setIsEditorReady(true);
-            }}
-          />
-        ) : data?.length === 0 ? (
+        {!data || data.length === 0 ? (
           <NoteListingPlaceholder />
         ) : (
           <NotesListing
