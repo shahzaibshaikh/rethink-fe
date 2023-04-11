@@ -12,7 +12,7 @@ import {
   Input,
   HStack
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 
 interface FolderModalProps {
   isOpen: boolean;
@@ -21,6 +21,11 @@ interface FolderModalProps {
 
 function FolderModal({ isOpen, onClose }: FolderModalProps) {
   const [folderName, setFolderName] = useState<string>('');
+
+  function handleSubmit(event: FormEvent) {
+    event.preventDefault();
+    console.log(folderName);
+  }
 
   return (
     <>
@@ -32,7 +37,7 @@ function FolderModal({ isOpen, onClose }: FolderModalProps) {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody fontSize='13px'>
-            <form>
+            <form onSubmit={event => handleSubmit(event)}>
               <FormControl>
                 <FormLabel fontWeight={600} fontSize='sm'>
                   Folder name
@@ -59,6 +64,7 @@ function FolderModal({ isOpen, onClose }: FolderModalProps) {
                   fontSize='sm'
                   color='white'
                   bg='purple.600'
+                  type='submit'
                   variant='solid'
                   _hover={{ bg: 'gray.700', color: 'gray.100' }}
                 >
