@@ -9,9 +9,10 @@ import {
   Button,
   FormControl,
   FormLabel,
-  Input
+  Input,
+  HStack
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useState } from 'react';
 
 interface FolderModalProps {
   isOpen: boolean;
@@ -19,6 +20,8 @@ interface FolderModalProps {
 }
 
 function FolderModal({ isOpen, onClose }: FolderModalProps) {
+  const [folderName, setFolderName] = useState<string>('');
+
   return (
     <>
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
@@ -34,31 +37,36 @@ function FolderModal({ isOpen, onClose }: FolderModalProps) {
                 <FormLabel fontWeight={600} fontSize='sm'>
                   Folder name
                 </FormLabel>
-                <Input fontSize='sm' type='text' placeholder='Enter folder name' />
+                <Input
+                  value={folderName}
+                  onChange={event => setFolderName(event.target.value)}
+                  fontSize='sm'
+                  type='text'
+                  placeholder='Enter folder name'
+                />
               </FormControl>
+              <HStack mt={8} mb={3} justifyContent='space-between'>
+                <Button
+                  colorScheme='red'
+                  mr={3}
+                  onClick={onClose}
+                  variant='outline'
+                  fontSize='sm'
+                >
+                  Close
+                </Button>
+                <Button
+                  fontSize='sm'
+                  color='white'
+                  bg='purple.600'
+                  variant='solid'
+                  _hover={{ bg: 'gray.700', color: 'gray.100' }}
+                >
+                  Create Folder
+                </Button>
+              </HStack>
             </form>
           </ModalBody>
-
-          <ModalFooter>
-            <Button
-              colorScheme='red'
-              mr={3}
-              onClick={onClose}
-              variant='outline'
-              fontSize='sm'
-            >
-              Close
-            </Button>
-            <Button
-              fontSize='sm'
-              color='white'
-              bg='purple.600'
-              variant='solid'
-              _hover={{ bg: 'gray.700', color: 'gray.100' }}
-            >
-              Create Folder
-            </Button>
-          </ModalFooter>
         </ModalContent>
       </Modal>
     </>

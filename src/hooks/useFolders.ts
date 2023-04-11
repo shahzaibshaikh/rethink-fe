@@ -30,7 +30,28 @@ function useFolders() {
     }
   }
 
-  return { loading, error, data, getFolders };
+  async function createFolder(token: string, name: string) {
+    try {
+      const response = await apiClient.post(
+        '/api/folders',
+        {
+          name: name
+        },
+        {
+          headers: {
+            Authorization: 'Bearer ' + token,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+      return true;
+    } catch (error: any) {
+      return false;
+    } finally {
+    }
+  }
+
+  return { loading, error, data, getFolders, createFolder };
 }
 
 export default useFolders;
