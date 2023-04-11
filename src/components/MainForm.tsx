@@ -12,9 +12,10 @@ import useNotes from '../hooks/useNotes';
 
 interface MainFormProps {
   setEditorStatus: (flag: boolean) => void;
+  folder_id: string;
 }
 
-function MainForm({ setEditorStatus }: MainFormProps) {
+function MainForm({ setEditorStatus, folder_id }: MainFormProps) {
   const [isExistingNote, setIsExistingNote] = useState<boolean>(false);
   const { loading, data }: NoteStateOne = useSelector((state: any) => state.noteDetail);
   const { getNotes } = useNotes();
@@ -34,9 +35,11 @@ function MainForm({ setEditorStatus }: MainFormProps) {
     const token = localStorage.getItem('token');
 
     if (token && !isExistingNote)
-      createNote(token, payload).then(() => getNotes(token, ''));
+      createNote(token, payload).then(() => getNotes(token, folder_id));
     if (token && isExistingNote)
-      saveNote(token, { ...payload, id: data?._id }).then(() => getNotes(token, ''));
+      saveNote(token, { ...payload, id: data?._id }).then(() =>
+        getNotes(token, folder_id)
+      );
   }
 
   function handleDelete() {
@@ -44,7 +47,7 @@ function MainForm({ setEditorStatus }: MainFormProps) {
     if (token)
       deleteNote(token, data?._id as string).then(() => {
         setEditorStatus(false);
-        getNotes(token, '');
+        getNotes(token, folder_id);
       });
   }
 
