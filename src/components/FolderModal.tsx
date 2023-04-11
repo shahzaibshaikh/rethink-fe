@@ -6,7 +6,10 @@ import {
   ModalHeader,
   ModalOverlay,
   ModalFooter,
-  Button
+  Button,
+  FormControl,
+  FormLabel,
+  Input
 } from '@chakra-ui/react';
 import React from 'react';
 
@@ -18,20 +21,43 @@ interface FolderModalProps {
 function FolderModal({ isOpen, onClose }: FolderModalProps) {
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader fontWeight={700} fontSize='18px'>
+            Create a new folder
+          </ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, amet?
+          <ModalBody fontSize='13px'>
+            <form>
+              <FormControl>
+                <FormLabel fontWeight={600} fontSize='sm'>
+                  Folder name
+                </FormLabel>
+                <Input fontSize='sm' type='text' placeholder='Enter folder name' />
+              </FormControl>
+            </form>
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={onClose}>
+            <Button
+              colorScheme='red'
+              mr={3}
+              onClick={onClose}
+              variant='outline'
+              fontSize='sm'
+            >
               Close
             </Button>
-            <Button variant='ghost'>Secondary Action</Button>
+            <Button
+              fontSize='sm'
+              color='white'
+              bg='purple.600'
+              variant='solid'
+              _hover={{ bg: 'gray.700', color: 'gray.100' }}
+            >
+              Create Folder
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
