@@ -1,4 +1,4 @@
-import { Button, Heading, HStack, Image, Text } from '@chakra-ui/react';
+import { Button, Heading, HStack, Image, Text, useDisclosure } from '@chakra-ui/react';
 import brandImage from '../assets/rethink-logo-full.png';
 import { BsFillFolderFill } from 'react-icons/bs';
 import { HiFolderPlus } from 'react-icons/hi2';
@@ -6,6 +6,7 @@ import { HiPencilSquare } from 'react-icons/hi2';
 import { FolderInfo, FolderState } from '../interfaces/FolderInterfaces';
 import { useDispatch, useSelector } from 'react-redux';
 import { setData } from '../store/slices/noteDetailSlice';
+import FolderModal from './FolderModal';
 
 interface FolderMenuProps {
   setSelectFolder: (folder_id: string, folder_name: string) => void;
@@ -20,6 +21,8 @@ function FolderMenu({
 }: FolderMenuProps) {
   const dispatch = useDispatch();
   const { loading, data }: FolderState = useSelector((state: any) => state.folders);
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <div>
       <Image src={brandImage} width={36} />
@@ -74,12 +77,19 @@ function FolderMenu({
           </HStack>
         ))}
 
-      <HStack color='gray.500' mt={4} _hover={{ color: 'white', transition: '300ms' }}>
+      <HStack
+        color='gray.500'
+        mt={4}
+        _hover={{ color: 'white', transition: '300ms' }}
+        onClick={onOpen}
+        cursor='pointer'
+      >
         <HiFolderPlus size={17} />
         <Text fontSize='14px' fontWeight={700}>
           Add folder
         </Text>
       </HStack>
+      <FolderModal isOpen={isOpen} onClose={onClose} />
     </div>
   );
 }
