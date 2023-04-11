@@ -3,14 +3,17 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Spinner } from '@chakra-ui/react';
 import { NoteStateOne } from '../interfaces/NoteInterface';
-import apiClient from '../services/apiClient';
-import { setData, setError, setLoading } from '../store/slices/noteDetailSlice';
+import { setData } from '../store/slices/noteDetailSlice';
 import MainFormMeta from './MainFormMeta';
 import NoteOptionsIcon from './NoteOptionsIcon';
 import RichText from './RichText';
 import useCreateNote from '../hooks/useCreateNote';
 
-function MainForm() {
+interface MainFormProps {
+  setEditorStatus: (flag: boolean) => void;
+}
+
+function MainForm({ setEditorStatus }: MainFormProps) {
   const [isExistingNote, setIsExistingNote] = useState<boolean>(false);
   const { loading, data }: NoteStateOne = useSelector((state: any) => state.noteDetail);
   const { createNote, saveNote, deleteNote } = useCreateNote();
@@ -34,7 +37,7 @@ function MainForm() {
 
   function handleDelete() {
     const token = localStorage.getItem('token');
-    if (token) deleteNote(token, data?._id as string);
+    if (token) deleteNote(token, data?._id as string).then(() => setEditorStatus(false));
   }
 
   return (

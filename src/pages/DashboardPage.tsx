@@ -70,7 +70,11 @@ function DashboardPage() {
         )}
       </GridItem>
       <GridItem area='main' background='gray.600' height='100vh' padding={6}>
-        {isEditorReady ? <MainForm /> : <NotePlaceholderPage />}
+        {isEditorReady ? (
+          <MainForm setEditorStatus={(value: boolean) => setIsEditorReady(value)} />
+        ) : (
+          <NotePlaceholderPage />
+        )}
       </GridItem>
     </Grid>
   );
