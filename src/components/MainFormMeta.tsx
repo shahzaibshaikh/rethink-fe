@@ -8,12 +8,9 @@ import {
   MenuList,
   Text
 } from '@chakra-ui/react';
-import { useEffect } from 'react';
+import { useState } from 'react';
 import { BsChevronDown, BsFillCalendar3WeekFill, BsFillFolderFill } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
-import useCreateNote from '../hooks/useCreateNote';
-import useFolders from '../hooks/useFolders';
-import useNoteDetail from '../hooks/useNoteDetail';
 import { FolderInfo, FolderState } from '../interfaces/FolderInterfaces';
 import formatDate from '../utilities/dateFormatter';
 import HorizontalLine from './HorizontalLine';
@@ -25,6 +22,10 @@ interface MainFormMetaProps {
 }
 
 function MainFormMeta({ date, folder_name, folder_id }: MainFormMetaProps) {
+  const [selectedFolder, setSelectedFolder] = useState<FolderInfo>({
+    _id: folder_id,
+    name: folder_name
+  });
   const { data }: FolderState = useSelector((state: any) => state.folders);
 
   return (
@@ -55,14 +56,16 @@ function MainFormMeta({ date, folder_name, folder_id }: MainFormMetaProps) {
         <Menu isLazy>
           <MenuButton fontSize='13px' fontWeight={600} color='white'>
             <HStack>
-              <Text> {folder_name}</Text>
+              <Text> {selectedFolder?.name}</Text>
               <BsChevronDown />
             </HStack>
           </MenuButton>
           <MenuList zIndex={10} color='white'>
             {data &&
               data.map((folder: FolderInfo) => (
-                <MenuItem key={folder._id}>{folder.name}</MenuItem>
+                <MenuItem onClick={() => setSelectedFolder(folder)} key={folder._id}>
+                  {folder.name}
+                </MenuItem>
               ))}
           </MenuList>
         </Menu>
