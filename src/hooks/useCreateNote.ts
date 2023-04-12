@@ -7,7 +7,7 @@ export interface NoteData {
   title: string;
   content: string;
   id?: string;
-  folder?: string;
+  folder_id?: string;
 }
 
 function useCreateNote() {
@@ -44,21 +44,21 @@ function useCreateNote() {
   }
 
   async function saveNote(token: string, noteData: NoteData) {
+    const payload: NoteData = {
+      title: noteData?.title,
+      content: noteData?.content
+    };
+
+    if (noteData?.folder_id) payload.folder_id = noteData.folder_id;
+
     try {
       dispatch(setLoading(true));
-      const response = await apiClient.put(
-        `/api/notes/${noteData.id}`,
-        {
-          title: noteData?.title,
-          content: noteData?.content
-        },
-        {
-          headers: {
-            Authorization: 'Bearer ' + token,
-            'Content-Type': 'application/json'
-          }
+      const response = await apiClient.put(`/api/notes/${noteData.id}`, payload, {
+        headers: {
+          Authorization: 'Bearer ' + token,
+          'Content-Type': 'application/json'
         }
-      );
+      });
 
       dispatch(setData(response.data.note));
       return true;
