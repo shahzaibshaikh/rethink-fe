@@ -30,7 +30,8 @@ function MainForm({ setEditorStatus, folder_id }: MainFormProps) {
   function handleSave() {
     const payload = {
       title: data?.title as string,
-      content: data?.content as string
+      content: data?.content as string,
+      folder_id: data?.folder?.folder_id as string
     };
     const token = localStorage.getItem('token');
 

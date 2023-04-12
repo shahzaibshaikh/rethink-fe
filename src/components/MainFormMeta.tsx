@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   HStack,
   Menu,
   MenuButton,
@@ -10,8 +9,10 @@ import {
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { BsChevronDown, BsFillCalendar3WeekFill, BsFillFolderFill } from 'react-icons/bs';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FolderInfo, FolderState } from '../interfaces/FolderInterfaces';
+import { NoteState, NoteStateOne } from '../interfaces/NoteInterface';
+import { setData } from '../store/slices/noteDetailSlice';
 import formatDate from '../utilities/dateFormatter';
 import HorizontalLine from './HorizontalLine';
 
@@ -26,7 +27,11 @@ function MainFormMeta({ date, folder_name, folder_id }: MainFormMetaProps) {
     _id: folder_id,
     name: folder_name
   });
+  const dispatch = useDispatch();
   const { data }: FolderState = useSelector((state: any) => state.folders);
+  const { data: noteDetail }: NoteStateOne = useSelector(
+    (state: any) => state.noteDetail
+  );
 
   return (
     <Box>
@@ -62,8 +67,20 @@ function MainFormMeta({ date, folder_name, folder_id }: MainFormMetaProps) {
           </MenuButton>
           <MenuList zIndex={10} color='white'>
             {data &&
+              noteDetail &&
               data.map((folder: FolderInfo) => (
-                <MenuItem onClick={() => setSelectedFolder(folder)} key={folder._id}>
+                <MenuItem
+                  onClick={() => {
+                    setSelectedFolder(folder);
+                    dispatch(
+                      setData({
+                        ...noteDetail,
+                        folder: { ...noteDetail.folder, folder_id: folder._id }
+                      })
+                    );
+                  }}
+                  key={folder._id}
+                >
                   {folder.name}
                 </MenuItem>
               ))}
