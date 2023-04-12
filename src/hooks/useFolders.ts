@@ -64,7 +64,7 @@ function useFolders() {
     }
   }
 
-  return { loading, error, data, getFolders, createFolder };
+  return { loading, error, data, getFolders, createFolder, deleteFolder };
 }
 
 export default useFolders;

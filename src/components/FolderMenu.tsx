@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setData } from '../store/slices/noteDetailSlice';
 import FolderModal from './FolderModal';
 import { AiOutlineDelete } from 'react-icons/ai';
+import useFolders from '../hooks/useFolders';
 
 interface FolderMenuProps {
   setSelectFolder: (folder_id: string, folder_name: string) => void;
@@ -23,6 +24,12 @@ function FolderMenu({
   const dispatch = useDispatch();
   const { data }: FolderState = useSelector((state: any) => state.folders);
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { deleteFolder, getFolders } = useFolders();
+
+  function handleDelete(folder_id: string) {
+    const token = localStorage.getItem('token')!;
+    deleteFolder(token, folder_id).then(() => getFolders(token));
+  }
 
   return (
     <div>
@@ -79,7 +86,12 @@ function FolderMenu({
                 {folder.name}
               </Text>
             </HStack>
-            <HStack color='gray.600' _hover={{ color: 'red.300' }} cursor='pointer'>
+            <HStack
+              color='gray.600'
+              _hover={{ color: 'red.300' }}
+              cursor='pointer'
+              onClick={() => handleDelete(folder._id)}
+            >
               <AiOutlineDelete />
             </HStack>
           </HStack>
