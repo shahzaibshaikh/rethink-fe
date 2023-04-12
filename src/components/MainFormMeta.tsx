@@ -60,7 +60,10 @@ function MainFormMeta({ date, folder_name, folder_id }: MainFormMetaProps) {
             </HStack>
           </MenuButton>
           <MenuList zIndex={10} color='white'>
-            {data && data.map((folder: FolderInfo) => <MenuItem>{folder.name}</MenuItem>)}
+            {data &&
+              data.map((folder: FolderInfo) => (
+                <MenuItem key={folder._id}>{folder.name}</MenuItem>
+              ))}
           </MenuList>
         </Menu>
       </HStack>
