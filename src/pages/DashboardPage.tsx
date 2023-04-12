@@ -45,7 +45,7 @@ function DashboardPage() {
           area='aside'
           background='gray.800'
           height='100vh'
-          paddingInline='32px 20px'
+          padding='32px 20px 32px 32px'
         >
           <FolderMenu
             selectedFolder={selectedFolder.folder_id}
