@@ -22,13 +22,13 @@ interface FolderModalProps {
 
 function FolderModal({ isOpen, onClose }: FolderModalProps) {
   const [folderName, setFolderName] = useState<string>('');
-  const { createFolder } = useFolders();
+  const { createFolder, getFolders } = useFolders();
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
     console.log(folderName);
     const token = localStorage.getItem('token');
-    if (token) createFolder(token, folderName);
+    if (token) createFolder(token, folderName).then(() => getFolders(token));
   }
 
   return (
