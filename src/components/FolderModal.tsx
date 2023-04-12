@@ -12,7 +12,7 @@ import {
   Input,
   HStack
 } from '@chakra-ui/react';
-import React, { FormEvent, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import useFolders from '../hooks/useFolders';
 
 interface FolderModalProps {

@@ -7,6 +7,7 @@ import { FolderInfo, FolderState } from '../interfaces/FolderInterfaces';
 import { useDispatch, useSelector } from 'react-redux';
 import { setData } from '../store/slices/noteDetailSlice';
 import FolderModal from './FolderModal';
+import { AiOutlineDelete } from 'react-icons/ai';
 
 interface FolderMenuProps {
   setSelectFolder: (folder_id: string, folder_name: string) => void;
@@ -63,17 +64,24 @@ function FolderMenu({
       {data &&
         data.map((folder: FolderInfo) => (
           <HStack
-            onClick={() => setSelectFolder(folder._id, folder.name)}
-            cursor='pointer'
             key={folder._id}
             color={selectedFolder === folder._id ? 'white' : 'gray.500'}
             mt={4}
             _hover={{ color: 'white', transition: '300ms' }}
+            justifyContent='space-between'
           >
-            <BsFillFolderFill size={16} />
-            <Text fontSize='14px' fontWeight={700}>
-              {folder.name}
-            </Text>
+            <HStack
+              onClick={() => setSelectFolder(folder._id, folder.name)}
+              cursor='pointer'
+            >
+              <BsFillFolderFill size={16} />
+              <Text fontSize='14px' fontWeight={700}>
+                {folder.name}
+              </Text>
+            </HStack>
+            <HStack color='red.300'>
+              <AiOutlineDelete />
+            </HStack>
           </HStack>
         ))}
 

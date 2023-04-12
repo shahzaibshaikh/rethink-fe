@@ -41,7 +41,12 @@ function DashboardPage() {
       gridTemplateColumns={{ lg: '250px 300px auto', base: '1fr 2fr' }}
     >
       <Show above='lg'>
-        <GridItem area='aside' background='gray.800' height='100vh' padding={8}>
+        <GridItem
+          area='aside'
+          background='gray.800'
+          height='100vh'
+          paddingInline='32px 24px'
+        >
           <FolderMenu
             selectedFolder={selectedFolder.folder_id}
             setEditorStatus={(value: boolean) => setIsEditorReady(value)}
