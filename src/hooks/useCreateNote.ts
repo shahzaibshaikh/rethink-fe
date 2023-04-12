@@ -17,21 +17,21 @@ function useCreateNote() {
   );
 
   async function createNote(token: string, noteData: NoteData) {
+    const payload: NoteData = {
+      title: noteData?.title,
+      content: noteData?.content
+    };
+
+    payload.folder_id = noteData?.folder_id ? noteData.folder_id : '';
+
     try {
       dispatch(setLoading(true));
-      const response = await apiClient.post(
-        '/api/notes',
-        {
-          title: noteData?.title,
-          content: noteData?.content
-        },
-        {
-          headers: {
-            Authorization: 'Bearer ' + token,
-            'Content-Type': 'application/json'
-          }
+      const response = await apiClient.post('/api/notes', payload, {
+        headers: {
+          Authorization: 'Bearer ' + token,
+          'Content-Type': 'application/json'
         }
-      );
+      });
 
       dispatch(setData(response.data.note));
       return true;
