@@ -47,7 +47,20 @@ function useFolders() {
       return true;
     } catch (error: any) {
       return false;
-    } finally {
+    }
+  }
+
+  async function deleteFolder(token: string, folder_id: string) {
+    try {
+      const response = await apiClient.delete(`/api/folders/${folder_id}`, {
+        headers: {
+          Authorization: 'Bearer ' + token,
+          'Content-Type': 'application/json'
+        }
+      });
+      return true;
+    } catch (error: any) {
+      return false;
     }
   }
 

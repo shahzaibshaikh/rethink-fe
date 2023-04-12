@@ -21,7 +21,7 @@ function FolderMenu({
   selectedFolder
 }: FolderMenuProps) {
   const dispatch = useDispatch();
-  const { loading, data }: FolderState = useSelector((state: any) => state.folders);
+  const { data }: FolderState = useSelector((state: any) => state.folders);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
