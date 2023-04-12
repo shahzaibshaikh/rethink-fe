@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux';
 import useCreateNote from '../hooks/useCreateNote';
 import useFolders from '../hooks/useFolders';
 import useNoteDetail from '../hooks/useNoteDetail';
-import { FolderState } from '../interfaces/FolderInterfaces';
+import { FolderInfo, FolderState } from '../interfaces/FolderInterfaces';
 import formatDate from '../utilities/dateFormatter';
 import HorizontalLine from './HorizontalLine';
 
@@ -60,9 +60,7 @@ function MainFormMeta({ date, folder_name, folder_id }: MainFormMetaProps) {
             </HStack>
           </MenuButton>
           <MenuList zIndex={10} color='white'>
-            <MenuItem>New Window</MenuItem>
-            <MenuItem>Open Closed Tab</MenuItem>
-            <MenuItem>Open File</MenuItem>
+            {data && data.map((folder: FolderInfo) => <MenuItem>{folder.name}</MenuItem>)}
           </MenuList>
         </Menu>
       </HStack>
