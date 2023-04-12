@@ -46,7 +46,7 @@ function MainFormMeta({ date, folder_name }: MainFormMetaProps) {
         <Menu isLazy>
           <MenuButton fontSize='13px' fontWeight={600} color='white'>
             <HStack>
-              <Text> Open menu</Text>
+              <Text> {folder_name}</Text>
               <BsChevronDown />
             </HStack>
           </MenuButton>
