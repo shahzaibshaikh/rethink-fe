@@ -21,7 +21,7 @@ function RichText() {
         init={{
           height: '480px',
           menubar: false,
-          // skin: 'dark-rethink',
+          skin: 'dark-rethink',
           resize: false,
           content_css: '/tinymce.css',
           plugins: [
