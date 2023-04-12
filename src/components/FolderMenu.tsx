@@ -9,6 +9,7 @@ import { setData } from '../store/slices/noteDetailSlice';
 import FolderModal from './FolderModal';
 import { AiOutlineDelete } from 'react-icons/ai';
 import useFolders from '../hooks/useFolders';
+import useNotes from '../hooks/useNotes';
 
 interface FolderMenuProps {
   setSelectFolder: (folder_id: string, folder_name: string) => void;
@@ -25,10 +26,14 @@ function FolderMenu({
   const { data }: FolderState = useSelector((state: any) => state.folders);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { deleteFolder, getFolders } = useFolders();
+  const { getNotes } = useNotes();
 
   function handleDelete(folder_id: string) {
     const token = localStorage.getItem('token')!;
-    deleteFolder(token, folder_id).then(() => getFolders(token));
+    deleteFolder(token, folder_id).then(() => {
+      getFolders(token);
+      getNotes(token, 'all');
+    });
   }
 
   return (
