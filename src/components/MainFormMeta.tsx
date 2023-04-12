@@ -8,16 +8,25 @@ import {
   MenuList,
   Text
 } from '@chakra-ui/react';
+import { useEffect } from 'react';
 import { BsChevronDown, BsFillCalendar3WeekFill, BsFillFolderFill } from 'react-icons/bs';
+import { useSelector } from 'react-redux';
+import useCreateNote from '../hooks/useCreateNote';
+import useFolders from '../hooks/useFolders';
+import useNoteDetail from '../hooks/useNoteDetail';
+import { FolderState } from '../interfaces/FolderInterfaces';
 import formatDate from '../utilities/dateFormatter';
 import HorizontalLine from './HorizontalLine';
 
 interface MainFormMetaProps {
   date: string;
   folder_name: string;
+  folder_id: string;
 }
 
-function MainFormMeta({ date, folder_name }: MainFormMetaProps) {
+function MainFormMeta({ date, folder_name, folder_id }: MainFormMetaProps) {
+  const { data }: FolderState = useSelector((state: any) => state.folders);
+
   return (
     <Box>
       <HStack gap={14} fontWeight={600} fontSize='13px' color='gray.500' mb={2} mt={6}>
@@ -51,7 +60,6 @@ function MainFormMeta({ date, folder_name }: MainFormMetaProps) {
             </HStack>
           </MenuButton>
           <MenuList zIndex={10} color='white'>
-            {/* MenuItems are not rendered unless Menu is open */}
             <MenuItem>New Window</MenuItem>
             <MenuItem>Open Closed Tab</MenuItem>
             <MenuItem>Open File</MenuItem>

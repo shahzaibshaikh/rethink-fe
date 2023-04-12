@@ -77,6 +77,7 @@ function MainForm({ setEditorStatus, folder_id }: MainFormProps) {
             <NoteOptionsIcon />
           </HStack>
           <MainFormMeta
+            folder_id={data?.folder?.folder_id ?? ''}
             folder_name={data?.folder?.name ?? 'All notes'}
             date={data?.updated_at ?? now.toString()}
           />
