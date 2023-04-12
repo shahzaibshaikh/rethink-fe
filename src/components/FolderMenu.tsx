@@ -79,7 +79,7 @@ function FolderMenu({
                 {folder.name}
               </Text>
             </HStack>
-            <HStack color='red.300'>
+            <HStack color='gray.600' _hover={{ color: 'red.300' }} cursor='pointer'>
               <AiOutlineDelete />
             </HStack>
           </HStack>
