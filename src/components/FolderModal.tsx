@@ -28,7 +28,11 @@ function FolderModal({ isOpen, onClose }: FolderModalProps) {
     event.preventDefault();
     console.log(folderName);
     const token = localStorage.getItem('token');
-    if (token) createFolder(token, folderName).then(() => getFolders(token));
+    if (token)
+      createFolder(token, folderName).then(() => {
+        getFolders(token);
+        onClose();
+      });
   }
 
   return (
