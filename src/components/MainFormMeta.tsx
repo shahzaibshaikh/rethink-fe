@@ -65,26 +65,28 @@ function MainFormMeta({ date, folder_name, folder_id }: MainFormMetaProps) {
               <BsChevronDown />
             </HStack>
           </MenuButton>
-          <MenuList zIndex={10} color='white'>
-            {data &&
-              noteDetail &&
-              data.map((folder: FolderInfo) => (
-                <MenuItem
-                  onClick={() => {
-                    setSelectedFolder(folder);
-                    dispatch(
-                      setData({
-                        ...noteDetail,
-                        folder: { ...noteDetail.folder, folder_id: folder._id }
-                      })
-                    );
-                  }}
-                  key={folder._id}
-                >
-                  {folder.name}
-                </MenuItem>
-              ))}
-          </MenuList>
+          {data?.length !== 0 && (
+            <MenuList zIndex={10} color='white'>
+              {data &&
+                noteDetail &&
+                data.map((folder: FolderInfo) => (
+                  <MenuItem
+                    onClick={() => {
+                      setSelectedFolder(folder);
+                      dispatch(
+                        setData({
+                          ...noteDetail,
+                          folder: { ...noteDetail.folder, folder_id: folder._id }
+                        })
+                      );
+                    }}
+                    key={folder._id}
+                  >
+                    {folder.name}
+                  </MenuItem>
+                ))}
+            </MenuList>
+          )}
         </Menu>
       </HStack>
       <HorizontalLine />
