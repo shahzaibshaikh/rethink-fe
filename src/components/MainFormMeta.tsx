@@ -62,7 +62,7 @@ function MainFormMeta({ date, folder_name, folder_id }: MainFormMetaProps) {
           <MenuButton fontSize='13px' fontWeight={600} color='white'>
             <HStack>
               <Text> {selectedFolder?.name}</Text>
-              <BsChevronDown />
+              <BsChevronDown visibility={data ? 'visible' : 'hidden'} />
             </HStack>
           </MenuButton>
           {data && (
