@@ -116,7 +116,7 @@ function useCreateNote() {
     }
   }
 
-  return { createNote, loading, error, data, saveNote, deleteNote };
+  return { createNote, loading, error, data, saveNote, deleteNote, favoriteNote };
 }
 
 export default useCreateNote;
