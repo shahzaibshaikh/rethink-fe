@@ -65,7 +65,7 @@ function MainFormMeta({ date, folder_name, folder_id }: MainFormMetaProps) {
               <BsChevronDown />
             </HStack>
           </MenuButton>
-          {data?.length !== 0 && (
+          {data && (
             <MenuList zIndex={10} color='white'>
               {data &&
                 noteDetail &&
