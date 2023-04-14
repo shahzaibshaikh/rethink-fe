@@ -15,7 +15,7 @@ function NoteOptionsIcon() {
       />
       <MenuList fontSize='13px'>
         <MenuItem icon={<BsStar size={16} />}>Add to favourites</MenuItem>
-        <MenuItem icon={<AiOutlineDelete size={16} />}>Delete</MenuItem>
+        {/* <MenuItem icon={<AiOutlineDelete size={16} />}>Delete</MenuItem> */}
       </MenuList>
     </Menu>
   );
