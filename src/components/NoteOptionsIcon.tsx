@@ -1,8 +1,27 @@
 import { IconButton, Menu, MenuItem, MenuButton, MenuList } from '@chakra-ui/react';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { BsStar, BsThreeDots } from 'react-icons/bs';
+import { useSelector } from 'react-redux';
+import useCreateNote from '../hooks/useCreateNote';
+import { NoteStateOne } from '../interfaces/NoteInterface';
 
-function NoteOptionsIcon() {
+interface NoteOptionsIconProps {
+  setEditorStatus: (value: boolean) => void;
+}
+
+function NoteOptionsIcon({ setEditorStatus }: NoteOptionsIconProps) {
+  const { loading, data }: NoteStateOne = useSelector((state: any) => state.noteDetail);
+  const { deleteNote } = useCreateNote();
+
+  function handleDelete() {
+    const token = localStorage.getItem('token');
+    if (token)
+      deleteNote(token, data?._id as string).then(() => {
+        setEditorStatus(false);
+        getNotes(token, folder_id);
+      });
+  }
+
   return (
     <Menu>
       <MenuButton
@@ -15,7 +34,7 @@ function NoteOptionsIcon() {
       />
       <MenuList fontSize='13px'>
         <MenuItem icon={<BsStar size={16} />}>Add to favourites</MenuItem>
-        {/* <MenuItem icon={<AiOutlineDelete size={16} />}>Delete</MenuItem> */}
+        <MenuItem icon={<AiOutlineDelete size={16} />}>Delete</MenuItem>
       </MenuList>
     </Menu>
   );
