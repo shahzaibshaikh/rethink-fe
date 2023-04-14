@@ -75,7 +75,7 @@ function MainForm({ setEditorStatus, folder_id }: MainFormProps) {
                 />
               </InputGroup>
             </form>
-            <NoteOptionsIcon />
+            <NoteOptionsIcon setEditorStatus={setEditorStatus} />
           </HStack>
           <MainFormMeta
             folder_id={data?.folder?.folder_id ?? ''}
