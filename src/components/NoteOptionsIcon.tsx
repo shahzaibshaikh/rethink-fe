@@ -18,11 +18,12 @@ function NoteOptionsIcon({ setEditorStatus, folder_id }: NoteOptionsIconProps) {
 
   function handleDelete() {
     const token = localStorage.getItem('token');
-    if (token)
+    if (token) {
       deleteNote(token, data?._id as string).then(() => {
         setEditorStatus(false);
         getNotes(token, folder_id);
       });
+    }
   }
 
   return (
@@ -37,7 +38,9 @@ function NoteOptionsIcon({ setEditorStatus, folder_id }: NoteOptionsIconProps) {
       />
       <MenuList fontSize='13px'>
         <MenuItem icon={<BsStar size={16} />}>Add to favourites</MenuItem>
-        <MenuItem icon={<AiOutlineDelete size={16} />}>Delete</MenuItem>
+        <MenuItem icon={<AiOutlineDelete size={16} onClick={handleDelete} />}>
+          Delete
+        </MenuItem>
       </MenuList>
     </Menu>
   );
