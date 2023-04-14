@@ -3,15 +3,18 @@ import { AiOutlineDelete } from 'react-icons/ai';
 import { BsStar, BsThreeDots } from 'react-icons/bs';
 import { useSelector } from 'react-redux';
 import useCreateNote from '../hooks/useCreateNote';
+import useNotes from '../hooks/useNotes';
 import { NoteStateOne } from '../interfaces/NoteInterface';
 
 interface NoteOptionsIconProps {
   setEditorStatus: (value: boolean) => void;
+  folder_id: string;
 }
 
-function NoteOptionsIcon({ setEditorStatus }: NoteOptionsIconProps) {
+function NoteOptionsIcon({ setEditorStatus, folder_id }: NoteOptionsIconProps) {
   const { loading, data }: NoteStateOne = useSelector((state: any) => state.noteDetail);
   const { deleteNote } = useCreateNote();
+  const { getNotes } = useNotes();
 
   function handleDelete() {
     const token = localStorage.getItem('token');
