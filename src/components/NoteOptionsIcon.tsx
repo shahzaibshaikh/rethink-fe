@@ -49,7 +49,9 @@ function NoteOptionsIcon({
         variant='outline'
       />
       <MenuList fontSize='13px'>
-        <MenuItem icon={<BsStar size={16} />}>Add to favourites</MenuItem>
+        <MenuItem icon={<BsStar size={16} />} onClick={handleFavorite}>
+          Add to favourites
+        </MenuItem>
         {isExistingNote && (
           <MenuItem icon={<AiOutlineDelete size={16} />} onClick={handleDelete}>
             Delete
