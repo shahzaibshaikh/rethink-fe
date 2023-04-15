@@ -116,7 +116,42 @@ function useCreateNote() {
     }
   }
 
-  return { createNote, loading, error, data, saveNote, deleteNote, favoriteNote };
+  async function removeFavoriteNote(token: string, id: string) {
+    try {
+      dispatch(setLoading(true));
+      const response = await apiClient.put(
+        `/api/notes/${id}`,
+        {
+          is_favorite: false
+        },
+        {
+          headers: {
+            Authorization: 'Bearer ' + token,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+
+      dispatch(setData(response.data.note));
+      return true;
+    } catch (error: any) {
+      dispatch(setError(error.response.data.error));
+      return false;
+    } finally {
+      dispatch(setLoading(false));
+    }
+  }
+
+  return {
+    createNote,
+    loading,
+    error,
+    data,
+    saveNote,
+    deleteNote,
+    favoriteNote,
+    removeFavoriteNote
+  };
 }
 
 export default useCreateNote;
