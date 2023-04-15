@@ -25,7 +25,6 @@ function NoteOptionsIcon({ setEditorStatus, folder_id }: NoteOptionsIconProps) {
       });
     }
   }
-
   return (
     <Menu>
       <MenuButton
@@ -38,9 +37,7 @@ function NoteOptionsIcon({ setEditorStatus, folder_id }: NoteOptionsIconProps) {
       />
       <MenuList fontSize='13px'>
         <MenuItem icon={<BsStar size={16} />}>Add to favourites</MenuItem>
-        <MenuItem
-          icon={<AiOutlineDelete size={16} onClick={() => console.log('delete')} />}
-        >
+        <MenuItem icon={<AiOutlineDelete size={16} />} onClick={handleDelete}>
           Delete
         </MenuItem>
       </MenuList>
