@@ -18,7 +18,7 @@ function NoteOptionsIcon({
   isExistingNote
 }: NoteOptionsIconProps) {
   const { loading, data }: NoteStateOne = useSelector((state: any) => state.noteDetail);
-  const { deleteNote } = useCreateNote();
+  const { deleteNote, favoriteNote } = useCreateNote();
   const { getNotes } = useNotes();
 
   function handleDelete() {
@@ -30,6 +30,16 @@ function NoteOptionsIcon({
       });
     }
   }
+
+  function handleFavorite() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      favoriteNote(token, data?._id as string).then(() => {
+        getNotes(token, folder_id);
+      });
+    }
+  }
+
   return (
     <Menu>
       <MenuButton
