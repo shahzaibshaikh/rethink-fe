@@ -9,6 +9,7 @@ import { NoteStateOne } from '../interfaces/NoteInterface';
 interface NoteOptionsIconProps {
   setEditorStatus: (value: boolean) => void;
   folder_id: string;
+  isExistingNote: boolean;
 }
 
 function NoteOptionsIcon({ setEditorStatus, folder_id }: NoteOptionsIconProps) {
