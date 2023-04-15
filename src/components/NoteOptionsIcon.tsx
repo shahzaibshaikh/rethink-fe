@@ -12,7 +12,11 @@ interface NoteOptionsIconProps {
   isExistingNote: boolean;
 }
 
-function NoteOptionsIcon({ setEditorStatus, folder_id }: NoteOptionsIconProps) {
+function NoteOptionsIcon({
+  setEditorStatus,
+  folder_id,
+  isExistingNote
+}: NoteOptionsIconProps) {
   const { loading, data }: NoteStateOne = useSelector((state: any) => state.noteDetail);
   const { deleteNote } = useCreateNote();
   const { getNotes } = useNotes();
@@ -38,9 +42,11 @@ function NoteOptionsIcon({ setEditorStatus, folder_id }: NoteOptionsIconProps) {
       />
       <MenuList fontSize='13px'>
         <MenuItem icon={<BsStar size={16} />}>Add to favourites</MenuItem>
-        <MenuItem icon={<AiOutlineDelete size={16} />} onClick={handleDelete}>
-          Delete
-        </MenuItem>
+        {isExistingNote && (
+          <MenuItem icon={<AiOutlineDelete size={16} />} onClick={handleDelete}>
+            Delete
+          </MenuItem>
+        )}
       </MenuList>
     </Menu>
   );
