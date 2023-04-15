@@ -54,11 +54,10 @@ function NoteOptionsIcon({
         <MenuItem icon={<BsStar size={16} />} onClick={handleFavorite}>
           Add to favorites
         </MenuItem>
-        {isExistingNote && (
-          <MenuItem icon={<AiOutlineDelete size={16} />} onClick={handleDelete}>
-            Delete
-          </MenuItem>
-        )}
+
+        <MenuItem icon={<AiOutlineDelete size={16} />} onClick={handleDelete}>
+          Delete
+        </MenuItem>
       </MenuList>
     </Menu>
   );
