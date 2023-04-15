@@ -26,13 +26,14 @@ function FolderModal({ isOpen, onClose }: FolderModalProps) {
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
-    console.log(folderName);
     const token = localStorage.getItem('token');
     if (token)
-      createFolder(token, folderName).then(() => {
-        getFolders(token);
-        onClose();
-      });
+      createFolder(token, folderName)
+        .then(() => {
+          getFolders(token);
+          onClose();
+        })
+        .finally(() => setFolderName(''));
   }
 
   return (
