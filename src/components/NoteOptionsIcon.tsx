@@ -56,12 +56,12 @@ function NoteOptionsIcon({ setEditorStatus, folder_id }: NoteOptionsIconProps) {
       />
       <MenuList fontSize='13px'>
         {data?.is_favorite ? (
-          <MenuItem icon={<BsStar size={16} />} onClick={handleFavorite}>
-            Add to favorites
-          </MenuItem>
-        ) : (
           <MenuItem icon={<BsStar size={16} />} onClick={handleRemoveFavorite}>
             Remove from favorites
+          </MenuItem>
+        ) : (
+          <MenuItem icon={<BsStar size={16} />} onClick={handleFavorite}>
+            Add to favorites
           </MenuItem>
         )}
 
