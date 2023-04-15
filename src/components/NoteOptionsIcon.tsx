@@ -13,7 +13,7 @@ interface NoteOptionsIconProps {
 
 function NoteOptionsIcon({ setEditorStatus, folder_id }: NoteOptionsIconProps) {
   const { loading, data }: NoteStateOne = useSelector((state: any) => state.noteDetail);
-  const { deleteNote, favoriteNote } = useCreateNote();
+  const { deleteNote, favoriteNote, removeFavoriteNote } = useCreateNote();
   const { getNotes } = useNotes();
 
   function handleDelete() {
@@ -38,7 +38,7 @@ function NoteOptionsIcon({ setEditorStatus, folder_id }: NoteOptionsIconProps) {
   function handleRemoveFavorite() {
     const token = localStorage.getItem('token');
     if (token) {
-      favoriteNote(token, data?._id as string).then(() => {
+      removeFavoriteNote(token, data?._id as string).then(() => {
         getNotes(token, folder_id);
       });
     }
