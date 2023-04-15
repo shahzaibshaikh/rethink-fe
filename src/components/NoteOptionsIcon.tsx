@@ -34,9 +34,7 @@ function NoteOptionsIcon({
   function handleFavorite() {
     const token = localStorage.getItem('token');
     if (token) {
-      favoriteNote(token, data?._id as string).then(() => {
-        getNotes(token, folder_id);
-      });
+      favoriteNote(token, data?._id as string);
     }
   }
 
