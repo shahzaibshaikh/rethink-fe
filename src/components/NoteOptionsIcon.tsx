@@ -34,7 +34,9 @@ function NoteOptionsIcon({
   function handleFavorite() {
     const token = localStorage.getItem('token');
     if (token) {
-      favoriteNote(token, data?._id as string);
+      favoriteNote(token, data?._id as string).then(() => {
+        getNotes(token, folder_id);
+      });
     }
   }
 
@@ -50,7 +52,7 @@ function NoteOptionsIcon({
       />
       <MenuList fontSize='13px'>
         <MenuItem icon={<BsStar size={16} />} onClick={handleFavorite}>
-          Add to favourites
+          Add to favorites
         </MenuItem>
         {isExistingNote && (
           <MenuItem icon={<AiOutlineDelete size={16} />} onClick={handleDelete}>
