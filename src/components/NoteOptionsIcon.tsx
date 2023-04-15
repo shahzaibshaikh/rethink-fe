@@ -35,6 +35,15 @@ function NoteOptionsIcon({ setEditorStatus, folder_id }: NoteOptionsIconProps) {
     }
   }
 
+  function handleRemoveFavorite() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      favoriteNote(token, data?._id as string).then(() => {
+        getNotes(token, folder_id);
+      });
+    }
+  }
+
   return (
     <Menu>
       <MenuButton
@@ -46,9 +55,15 @@ function NoteOptionsIcon({ setEditorStatus, folder_id }: NoteOptionsIconProps) {
         variant='outline'
       />
       <MenuList fontSize='13px'>
-        <MenuItem icon={<BsStar size={16} />} onClick={handleFavorite}>
-          Add to favorites
-        </MenuItem>
+        {data?.is_favorite ? (
+          <MenuItem icon={<BsStar size={16} />} onClick={handleFavorite}>
+            Add to favorites
+          </MenuItem>
+        ) : (
+          <MenuItem icon={<BsStar size={16} />} onClick={handleRemoveFavorite}>
+            Remove from favorites
+          </MenuItem>
+        )}
 
         <MenuItem icon={<AiOutlineDelete size={16} />} onClick={handleDelete}>
           Delete
