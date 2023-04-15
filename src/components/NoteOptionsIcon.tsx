@@ -9,14 +9,9 @@ import { NoteStateOne } from '../interfaces/NoteInterface';
 interface NoteOptionsIconProps {
   setEditorStatus: (value: boolean) => void;
   folder_id: string;
-  isExistingNote: boolean;
 }
 
-function NoteOptionsIcon({
-  setEditorStatus,
-  folder_id,
-  isExistingNote
-}: NoteOptionsIconProps) {
+function NoteOptionsIcon({ setEditorStatus, folder_id }: NoteOptionsIconProps) {
   const { loading, data }: NoteStateOne = useSelector((state: any) => state.noteDetail);
   const { deleteNote, favoriteNote } = useCreateNote();
   const { getNotes } = useNotes();
