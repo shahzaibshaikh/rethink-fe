@@ -6,19 +6,19 @@ import {
   Image,
   Input,
   Text
-} from '@chakra-ui/react';
-import bgImage from '../assets/stefan-cosma-muK4j9HjIrQ-unsplash.jpg';
-import brandImage from '../assets/rethink-logo-full.png';
-import { FormEvent, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import useLogin from '../hooks/useLogin';
-import { Spinner } from '@chakra-ui/react';
+} from "@chakra-ui/react";
+import bgImage from "../assets/stefan-cosma-muK4j9HjIrQ-unsplash.jpg";
+import brandImage from "../assets/rethink-logo-full.png";
+import { FormEvent, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import useLogin from "../hooks/useLogin";
+import { Spinner } from "@chakra-ui/react";
 
 function LoginPage() {
   const navigate = useNavigate();
   const [loginData, setLoginData] = useState({
-    email: '',
-    password: ''
+    email: "",
+    password: ""
   });
 
   const { loading, login } = useLogin();
@@ -27,7 +27,7 @@ function LoginPage() {
     event.preventDefault();
     login(loginData).then(success => {
       if (success) {
-        navigate('/');
+        navigate("/");
       }
     });
   }
@@ -61,7 +61,7 @@ function LoginPage() {
           {loading ? (
             <Spinner size='xl' color='purple.500' mb={6} mt={4} />
           ) : (
-            <form style={{ width: '100%' }} onSubmit={handleSubmit}>
+            <form style={{ width: "100%" }} onSubmit={handleSubmit}>
               <FormControl size='sm'>
                 <FormLabel fontWeight={600} fontSize='sm'>
                   Email address
@@ -98,16 +98,16 @@ function LoginPage() {
                 bg='white'
                 variant='solid'
                 type='submit'
-                _hover={{ bg: 'gray.700', color: 'gray.100' }}
+                _hover={{ bg: "gray.700", color: "gray.100" }}
               >
                 Sign in
               </Button>
             </form>
           )}
           <Text fontSize='xs' fontWeight={600} mt={3}>
-            Not a user? Sign up{' '}
+            Not a user? Sign up{" "}
             <Link to='/register' color='purple.600'>
-              <span style={{ color: '#6B46C1' }}>here</span>
+              <span style={{ color: "#6B46C1" }}>here</span>
             </Link>
           </Text>
         </Box>
