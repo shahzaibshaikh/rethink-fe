@@ -21,9 +21,9 @@ function RichText() {
         init={{
           height: '480px',
           menubar: false,
-          skin: 'dark-rethink',
+          // skin: 'dark-rethink',
           resize: false,
-          content_css: '/tinymce.css',
+          // content_css: '/tinymce.css',
           plugins: [
             'advlist',
             'autolink',
@@ -45,7 +45,7 @@ function RichText() {
             'alignright | alignjustify | bullist | numlist | blockquote | hr ',
 
           content_style:
-            'body { font-family:Inter,sans-serif; font-size:10px, line-height:1 }'
+            'body { font-family:Inter,sans-serif; font-size:14px, line-height:1 }'
         }}
       />
     </Box>
