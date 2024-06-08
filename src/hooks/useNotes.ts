@@ -35,7 +35,28 @@ function useNotes() {
     }
   }
 
-  return { loading, error, data, getNotes };
+  async function searchNotes(token: string, searchQuery: string) {
+    try {
+      dispatch(setLoading(true));
+
+      const response = await apiClient.get(`/api/notes/search?searchQuery=${searchQuery}`, {
+        headers: {
+          Authorization: 'Bearer ' + token,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      dispatch(setData(response.data.notes));
+      return true;
+    } catch (error: any) {
+      dispatch(setError(error.response.data.error));
+      return false;
+    } finally {
+      dispatch(setLoading(false));
+    }
+  }
+
+  return { loading, error, data, getNotes,searchNotes };
 }
 
 export default useNotes;
