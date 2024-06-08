@@ -20,7 +20,6 @@ function NotesListing({ folder_name, setNoteDetail }: NoteListingProps) {
 
   return (
     <Box>
-      <SearchInput />
       <HStack color='gray.500' mt={9} mb={6}>
         <BsFillFolderFill size={22} />
         <Heading

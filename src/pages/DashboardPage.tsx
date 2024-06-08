@@ -9,6 +9,7 @@ import useNoteDetail from '../hooks/useNoteDetail';
 import useNotes from '../hooks/useNotes';
 import NotePlaceholderPage from '../components/NotePlaceholderPage';
 import NoteListingPlaceholder from '../components/NoteListingPlaceholder';
+import SearchInput from '../components/SearchInput';
 
 function DashboardPage() {
   const navigate = useNavigate();
@@ -57,6 +58,7 @@ function DashboardPage() {
         </GridItem>
       </Show>
       <GridItem area='center' background='gray.700' height='100vh' padding={4}>
+        <SearchInput/>
         {!data || data.length === 0 ? (
           <NoteListingPlaceholder />
         ) : (
