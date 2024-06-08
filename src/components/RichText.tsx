@@ -8,8 +8,6 @@ import { NoteStateOne } from '../interfaces/NoteInterface';
 function RichText() {
   const { loading, data }: NoteStateOne = useSelector((state: any) => state.noteDetail);
   const dispatch = useDispatch();
-  const defaultString =
-    '<p><span style="color: rgb(137, 137, 137);">Write your thoughts here.</span></p>';
   return (
     <Box mt={6}>
       <Editor
@@ -21,9 +19,10 @@ function RichText() {
         init={{
           height: '480px',
           menubar: false,
-          // skin: 'dark-rethink',
+          placeholder: 'Write your thoughts here...',
+          skin: 'oxide-dark',
           resize: false,
-          // content_css: '/tinymce.css',
+          content_css: '/tinymce.css',
           plugins: [
             'advlist',
             'autolink',
