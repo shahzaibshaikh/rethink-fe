@@ -32,7 +32,7 @@ function NotesListing({ folder_name, setNoteDetail }: NoteListingProps) {
         </Heading>
       </HStack>
 
-      <Box overflowY='auto' maxHeight='560px'>
+      <Box overflowY='auto' maxHeight='82vh'>
         {loading
           ? skeletons.map(skeleton => (
               <Box key={skeleton}>
