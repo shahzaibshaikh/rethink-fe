@@ -25,7 +25,6 @@ function NotesListing({ folder_name, setNoteDetail }: NoteListingProps) {
         <Heading
           color='white'
           fontSize='18px'
-          mb={6}
           noOfLines={1}
           overflowWrap='break-word'
         >
